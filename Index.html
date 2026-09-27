@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Løbemave – pilot</title>
+<link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxODAgMTgwIj4KICA8ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMxMjhBN0UiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMwQjVBNTIiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz4KICA8cmVjdCB3aWR0aD0iMTgwIiBoZWlnaHQ9IjE4MCIgcng9IjQwIiBmaWxsPSJ1cmwoI2cpIi8+CiAgPGVsbGlwc2UgY3g9IjkwIiBjeT0iMTA0IiByeD0iNTgiIHJ5PSIzNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjRkZGRkZGIiBzdHJva2Utd2lkdGg9IjExIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1kYXNoYXJyYXk9IjI2MiA0MCIgdHJhbnNmb3JtPSJyb3RhdGUoLTggOTAgMTA0KSIvPgogIDxjaXJjbGUgY3g9IjE0Ny40IiBjeT0iOTUuOSIgcj0iMTAiIGZpbGw9IiNGRkZGRkYiLz4KICA8cGF0aCBkPSJNNjggMTE4IEM2OCA5MiA4OCA3NiAxMTQgNzggQzExMiAxMDQgOTYgMTIwIDY4IDExOCBaIiBmaWxsPSIjRENFRkQzIi8+CiAgPHBhdGggZD0iTTc0IDExMyBDODQgMTAyIDk2IDkyIDEwOCA4NCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMEI1QTUyIiBzdHJva2Utd2lkdGg9IjMuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+Cjwvc3ZnPgo=">
+<link rel="apple-touch-icon" href="data:image/png;base64,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">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Løbemave">
+<meta name="theme-color" content="#0E6E64">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+:root{
+  --bg:#F3F6F2; --panel:#FFFFFF; --ink:#1B2B25; --muted:#5C6B64; --line:#D5DDD7;
+  --accent:#0E6E64; --accent-ink:#FFFFFF; --soft:#DDEDE9;
+  --g0:#CFE3D6; --g1:#F2D98D; --g2:#E9A65B; --g3:#C9503F;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#121A16; --panel:#1B2520; --ink:#EAF1EC; --muted:#9DB0A6; --line:#2E3C35;
+  --accent:#4FB8AA; --accent-ink:#0F1A16; --soft:#1F3530;
+  --g0:#2C4A3C; --g1:#7A6A2A; --g2:#8C5A24; --g3:#9A3A2C; }}
+:root[data-theme="dark"]{
+  --bg:#121A16; --panel:#1B2520; --ink:#EAF1EC; --muted:#9DB0A6; --line:#2E3C35;
+  --accent:#4FB8AA; --accent-ink:#0F1A16; --soft:#1F3530;
+  --g0:#2C4A3C; --g1:#7A6A2A; --g2:#8C5A24; --g3:#9A3A2C; }
+html{scroll-padding-top:env(safe-area-inset-top,0px); height:100%}
+*{box-sizing:inherit}
+body{margin:0; height:100%; background:var(--bg); color:var(--ink);
+  font-family:"Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", sans-serif; font-size:17px; line-height:1.45}
+header{padding:18px 18px 8px}
+header h1{margin:0; font-size:22px; font-weight:700; letter-spacing:-.01em}
+header p{margin:2px 0 0; color:var(--muted); font-size:15px}
+main{padding:0 14px 96px; max-width:560px; margin:0 auto}
+section.view{display:none} section.view.on{display:block}
+h2{font-size:18px; margin:18px 0 8px}
+h3{font-size:16px; margin:14px 0 6px; color:var(--muted); font-weight:400}
+.card{background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:14px; margin-bottom:12px}
+label{display:block; font-size:15px; color:var(--muted); margin:10px 0 4px}
+input,select,textarea{width:100%; font:inherit; color:var(--ink); background:var(--bg); border:1px solid var(--line); border-radius:10px; padding:10px 12px}
+textarea{min-height:64px; resize:vertical}
+.row{display:flex; gap:8px} .row>*{flex:1}
+.chips{display:flex; flex-wrap:wrap; gap:6px; margin-top:6px}
+.chip{border:1px solid var(--line); background:var(--bg); color:var(--ink); border-radius:999px; padding:7px 12px; font:inherit; font-size:15px; cursor:pointer}
+.chip.on{background:var(--accent); color:var(--accent-ink); border-color:var(--accent)}
+.seg{display:flex; border:1px solid var(--line); border-radius:10px; overflow:hidden}
+.seg button{flex:1; border:0; background:var(--bg); color:var(--ink); padding:10px 4px; font:inherit; font-size:15px; cursor:pointer}
+.seg button.on{background:var(--accent); color:var(--accent-ink)}
+.btn{display:block; width:100%; border:0; border-radius:12px; padding:13px; font:inherit; font-weight:700; background:var(--accent); color:var(--accent-ink); cursor:pointer; margin-top:14px}
+.btn.quiet{background:var(--soft); color:var(--ink); font-weight:400}
+.btn:focus-visible,.chip:focus-visible,.seg button:focus-visible,.tab:focus-visible{outline:3px solid var(--accent); outline-offset:2px}
+.choose{display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px}
+.choose button{border:1px solid var(--line); background:var(--panel); color:var(--ink); border-radius:12px; padding:16px 6px; font:inherit; font-size:16px; cursor:pointer}
+.choose button.on{border-color:var(--accent); background:var(--soft)}
+.entry{display:grid; grid-template-columns:52px 1fr auto; gap:10px; padding:10px 0; border-top:1px solid var(--line); align-items:start}
+.entry:first-child{border-top:0}
+.entry .t{color:var(--muted); font-size:14px; padding-top:2px}
+.entry .k{font-size:14px; color:var(--muted)}
+.entry .del{background:none; border:0; color:var(--muted); font:inherit; font-size:14px; cursor:pointer; padding:0}
+.grade{display:inline-block; width:12px; height:12px; border-radius:50%; vertical-align:-1px; margin-right:6px}
+.tag{display:inline-block; font-size:13px; padding:2px 8px; border-radius:999px; background:var(--soft); margin:2px 4px 0 0}
+.empty{color:var(--muted); padding:8px 0}
+table{width:100%; border-collapse:collapse; font-size:15px}
+td,th{text-align:left; padding:8px 4px; border-top:1px solid var(--line); vertical-align:top}
+th{color:var(--muted); font-weight:400; border-top:0}
+.wrap{overflow-x:auto}
+.toast{position:fixed; left:50%; transform:translateX(-50%); bottom:calc(84px + env(safe-area-inset-bottom,0px)); background:var(--ink); color:var(--bg); padding:10px 16px; border-radius:999px; font-size:15px; opacity:0; transition:opacity .2s; pointer-events:none}
+.toast.on{opacity:1}
+nav{position:fixed; left:0; right:0; bottom:0; display:flex; background:var(--panel); border-top:1px solid var(--line); padding:6px 0 calc(6px + env(safe-area-inset-bottom,0px))}
+.tab{flex:1; border:0; background:none; color:var(--muted); font:inherit; font-size:13px; padding:6px 2px; cursor:pointer}
+.tab.on{color:var(--accent); font-weight:700}
+.tab span{display:block; font-size:20px}
+.note{font-size:14px; color:var(--muted)}
+@media (prefers-reduced-motion: reduce){ .toast{transition:none} }
+</style>
+</head>
+<body>
+<header>
+  <h1>Løbemave</h1>
+  <p id="sub">Pilot · registrér før du får symptomer</p>
+</header>
+<main>
+
+<!-- INTRO -->
+<section class="view" id="v-intro">
+  <div class="card">
+    <h2 style="margin-top:0">Hvorfor en dagbog?</h2>
+    <p>Løbermave har sjældent én årsag. Det, der giver problemer, er ofte en kombination af <em>hvad</em> du spiste, <em>hvor meget</em>, <em>hvor tæt på løbeturen</em> og hvor hård turen var. Det mønster er svært at se bagud i tide. Når først maven driller, husker man det, der passer med forklaringen.</p>
+    <p>Dagbogen vender rækkefølgen om: du registrerer maden, før du ved, hvordan turen går. Så bliver sammenhængen synlig i data, ikke i hukommelsen.</p>
+    <p>Den bygger på low FODMAP-metoden fra Monash University. FODMAP er en gruppe kulhydrater, som nogle maver reagerer på, og som findes i bl.a. hvede, løg, mælk, æbler, stenfrugt og champignon. Metoden har tre faser: eliminering, genintroduktion og en varig, personlig kost. Dagbogen hjælper især med de to sidste, hvor du finder ud af, hvilke grupper og mængder netop du tåler.</p>
+  </div>
+  <div class="card">
+    <h2 style="margin-top:0">Sådan bruger du den</h2>
+    <p><strong>Hver dag.</strong> Registrér dine måltider, når du spiser dem. Skriv kort hvad, og markér de FODMAP-grupper, der er i måltidet. Er du i tvivl, så se listen under <em>Mere</em>. Angiv portionen. Mængden betyder ofte mere end fødevaren.</p>
+    <p><strong>Når du løber.</strong> Gem turen med distance og intensitet, og angiv, hvordan maven var undervejs. Det er den vigtigste måling i dagbogen.</p>
+    <p><strong>Når maven driller.</strong> Registrér symptomet med det samme, også uden løb. Det er lige så vigtigt at vide, hvornår der <em>ikke</em> er symptomer.</p>
+    <p><strong>Når du vil teste en gruppe.</strong> Under <em>Test</em> starter du en genintroduktion: én gruppe, tre dage med stigende mængde, og en løbetur inden for et døgn efter mindst én af dagene. Hold tre dages pause før næste gruppe. Resultatet gemmes, så du med tiden får din egen tolerance-liste.</p>
+    <p><strong>Læs mønstrene.</strong> <em>Overblik</em> viser, hvad du spiste inden hver løbetur, og hvordan den gik. Tallene er et mønster, ikke et bevis. Først efter en del løbeture bliver de til at stole på.</p>
+    <p><strong>Mængden tæller.</strong> Mange fødevarer er lave i små mængder og høje i store. Skriv mængden, når du kan ("⅓ banan", "1 dl havregryn", "10 mandler"), så vurderer appen ud fra den. Flere mængdeafhængige fødevarer i samme måltid lægger sig sammen.</p>
+    <p class="note">Tre ting, der gør data brugbare: registrér før, ikke efter. Registrér også de gode dage. Skift kun én ting ad gangen.</p>
+  </div>
+  <div class="card">
+    <h2 style="margin-top:0">Dine data</h2>
+    <p class="note">Alt bliver på din telefon. Ingen data sendes nogen steder. Tag en sikkerhedskopi under <em>Mere</em> nu og da. Dagbogen er et refleksionsværktøj og erstatter ikke lægelig rådgivning.</p>
+    <button class="btn" id="intro-go">Start dagbogen</button>
+  </div>
+</section>
+
+<!-- I DAG -->
+<section class="view on" id="v-log">
+  <div class="card" id="arkivnudge" hidden><p class="note" style="margin:0">Det er over en uge siden, du sidst gemte et arkiv. <button class="chip" id="nudge-go">Gem arkiv nu</button></p></div>
+  <div class="choose" id="kind">
+    <button data-k="maaltid" class="on">Måltid</button>
+    <button data-k="loeb">Løbetur</button>
+    <button data-k="symptom">Symptom</button>
+  </div>
+
+  <div class="card" id="f-maaltid">
+    <label>Tidspunkt</label><input type="datetime-local" id="m-t">
+    <label>Hvad spiste du?</label><textarea id="m-mad" placeholder="fx havregrød med laktosefri mælk og banan"></textarea>
+    <div id="m-vurd" class="note" style="margin-top:6px"></div>
+    <label>FODMAP-grupper i måltidet <span class="note">(udfyldes ud fra vurderingen, ret gerne)</span></label>
+    <div class="chips" id="m-grp"></div>
+    <label>Portion</label>
+    <div class="seg" id="m-por"><button data-v="lille">Lille</button><button data-v="mellem" class="on">Mellem</button><button data-v="stor">Stor</button></div>
+    <button class="btn" id="m-save">Gem måltid</button>
+  </div>
+
+  <div class="card" id="f-loeb" hidden>
+    <label>Start</label><input type="datetime-local" id="l-t">
+    <div class="row">
+      <div><label>Varighed (min)</label><input type="number" id="l-min" inputmode="numeric" placeholder="60"></div>
+      <div><label>Distance (km)</label><input type="number" id="l-km" inputmode="decimal" step="0.1" placeholder="12"></div>
+    </div>
+    <label>Intensitet</label>
+    <div class="seg" id="l-int"><button data-v="let">Let</button><button data-v="moderat" class="on">Moderat</button><button data-v="hård">Hård</button></div>
+    <label>Mave under turen</label>
+    <div class="seg" id="l-mave"><button data-v="0" class="on">Rolig</button><button data-v="1">Lidt uro</button><button data-v="2">Generende</button><button data-v="3">Måtte stoppe</button></div>
+    <button class="btn" id="l-save">Gem løbetur</button>
+  </div>
+
+  <div class="card" id="f-symptom" hidden>
+    <label>Tidspunkt</label><input type="datetime-local" id="s-t">
+    <label>Type</label>
+    <div class="chips" id="s-type"></div>
+    <label>Grad</label>
+    <div class="seg" id="s-grad"><button data-v="1" class="on">Mild</button><button data-v="2">Moderat</button><button data-v="3">Kraftig</button></div>
+    <label>Sammenhæng med løb</label>
+    <div class="seg" id="s-ctx"><button data-v="ingen" class="on">Uden løb</button><button data-v="under">Under løb</button><button data-v="efter">Efter løb</button></div>
+    <label>Note (valgfri)</label><input id="s-note" placeholder="fx spiste ude i går">
+    <button class="btn" id="s-save">Gem symptom</button>
+  </div>
+
+  <h2>Seneste registreringer</h2>
+  <div class="card" id="recent"></div>
+</section>
+
+<!-- TEST -->
+<section class="view" id="v-test">
+  <div class="card" id="testbox"></div>
+  <h2>Gennemførte tests</h2>
+  <div class="card" id="tests-done"></div>
+  <p class="note">Metoden følger Monashs tre faser. Monash anbefaler diætistvejledning til genintroduktion; appen erstatter ikke den.</p>
+</section>
+
+<!-- OVERBLIK -->
+<section class="view" id="v-over">
+  <h2>Løbeture og det, du spiste før</h2>
+  <p class="note">Viser FODMAP-grupper spist inden for 24 timer før hver løbetur, og mave under turen samt symptomer op til 6 timer efter.</p>
+  <div class="card wrap" id="runs"></div>
+  <h2>Grupper og løbeture</h2>
+  <p class="note">Et mønster, ikke en forklaring. Få løbeture giver usikre tal.</p>
+  <div class="card wrap" id="groups"></div>
+</section>
+
+<!-- MERE -->
+<section class="view" id="v-more">
+  <div class="card">
+    <h2 style="margin-top:0">Dine data</h2>
+    <p class="note" id="datastatus"></p>
+    <p class="note">Alt gemmes automatisk på telefonen, mens du registrerer. Et arkiv er en kopi af alle data som én fil, som du kan lægge i Filer (fx iCloud Drive). Det er din backup, hvis browseren rydder sine data, eller du skifter telefon.</p>
+    <button class="btn" id="arkiv">Gem arkiv i Filer</button>
+    <input type="file" id="arkivfil" accept=".json,application/json" hidden>
+    <button class="btn quiet" id="gendan">Gendan fra arkiv</button>
+    <button class="btn quiet" id="exp">Vis data som tekst (kopiér)</button>
+    <textarea id="io" placeholder="Indsæt en sikkerhedskopi her for at gendanne" hidden></textarea>
+    <button class="btn quiet" id="imp" hidden>Gendan fra teksten</button>
+    <button class="btn quiet" id="wipe">Slet alle data</button>
+    <p class="note">Tip: Føj siden til hjemmeskærmen (Del → Føj til hjemmeskærm). Så bliver data ikke ryddet af Safari, selv om appen ikke bruges i en uge.</p>
+  </div>
+  <div class="card">
+    <h2 style="margin-top:0">Introduktion</h2>
+    <p class="note">Hvorfor dagbogen findes, og hvordan den bruges.</p>
+    <button class="btn quiet" id="intro-open">Læs introduktionen igen</button>
+  </div>
+  <div class="card">
+    <h2 style="margin-top:0">Slå en fødevare op</h2>
+    <input id="food-q" placeholder="fx løg, banan, havregryn">
+    <div id="food-r" style="margin-top:8px"></div>
+    <p class="note">Appens egen liste med almindelige danske fødevarer, bygget på offentligt tilgængelig viden om FODMAP-grupper. Den er vejledende, ikke en fødevaredatabase: mange fødevarer indeholder flere grupper, og mængden afgør. De angivne mængdegrænser er afrundede skøn ud fra almindeligt kendte værdier; brug Monash-appen, hvis du vil have de præcise tal. Er en fødevare ikke på listen, er den ikke vurderet.</p>
+  </div>
+</section>
+</main>
+
+<nav>
+  <button class="tab on" data-v="log"><span>✎</span>I dag</button>
+  <button class="tab" data-v="test"><span>◔</span>Test</button>
+  <button class="tab" data-v="over"><span>≡</span>Overblik</button>
+  <button class="tab" data-v="more"><span>…</span>Mere</button>
+</nav>
+<div class="toast" id="toast"></div>
+
+<script>
+const GROUPS=["Fruktaner","GOS","Laktose","Fruktose","Sorbitol","Mannitol"];
+const STYPES=["Oppustethed","Mavesmerter","Trang / diarré","Luft","Kvalme"];
+const KEY="lobemave-v1";
+/* Fødevareliste: n = navn, a = søgeord, g = grupper, l = 0 lav, 1 mængdeafhængig, 2 høj */
+const FOODS=[
+ {n:"Æble",a:["æble","æbler","æblejuice","æblemost"],g:["Fruktose","Sorbitol"],l:2},
+ {n:"Pære",a:["pære","pærer"],g:["Fruktose","Sorbitol"],l:2},
+ {n:"Blomme",a:["blomme","blommer","sveske","svesker"],g:["Sorbitol"],l:2},
+ {n:"Nektarin",a:["nektarin"],g:["Sorbitol","Fruktaner"],l:2},
+ {n:"Fersken",a:["fersken"],g:["Sorbitol","Fruktaner"],l:2},
+ {n:"Abrikos",a:["abrikos"],g:["Sorbitol"],l:2},
+ {n:"Kirsebær",a:["kirsebær"],g:["Fruktose","Sorbitol"],l:2},
+ {n:"Mango",a:["mango"],g:["Fruktose"],l:2},
+ {n:"Vandmelon",a:["vandmelon"],g:["Fruktose","Mannitol","Fruktaner"],l:2},
+ {n:"Honning",a:["honning"],g:["Fruktose"],l:2},
+ {n:"Agavesirup",a:["agave"],g:["Fruktose"],l:2},
+ {n:"Tørret frugt",a:["rosin","rosiner","dadler","dadel","figen","figner","tørret frugt","tranebær tørret"],g:["Fruktose","Fruktaner"],l:2},
+ {n:"Løg",o:1,a:["løg","rødløg","skalotte","forårsløg"],g:["Fruktaner"],l:2},
+ {n:"Hvidløg",o:1,a:["hvidløg"],g:["Fruktaner"],l:2},
+ {n:"Porre",o:1,a:["porre"],g:["Fruktaner"],l:2},
+ {n:"Hvede (brød, pasta, bulgur, couscous)",w:1,a:["hvede","franskbrød","brød","bolle","boller","pasta","spaghetti","pizza","couscous","bulgur","wienerbrød","kage","kiks","tortilla","nudler"],g:["Fruktaner"],l:2},
+ {n:"Rug",w:1,a:["rug","rugbrød"],g:["Fruktaner"],l:2},
+ {n:"Byg",w:1,a:["byg","perlebyg"],g:["Fruktaner"],l:2},
+ {n:"Bønner (kidney, hvide, sorte)",a:["bønner","kidneybønner","hvide bønner","sorte bønner","bagte bønner","baked beans"],g:["GOS","Fruktaner"],l:2},
+ {n:"Kikærter",lim:"½ dl (ca. 40 g, fra dåse) er lav, 1 dl er høj",thr:{u:"dl",v:0.5},a:["kikært","hummus","falafel"],g:["GOS"],l:1},
+ {n:"Linser",lim:"½ dl (ca. 45 g, fra dåse) er lav, 1 dl er høj",thr:{u:"dl",v:0.5},a:["linse","linser","dal"],g:["GOS"],l:1},
+ {n:"Mælk",d:1,a:["mælk","sødmælk","letmælk","skummetmælk","minimælk","kakaomælk","flødeskum","fløde"],g:["Laktose"],l:2},
+ {n:"Laktosefri mælk",a:["laktosefri"],g:[],l:0},
+ {n:"Yoghurt",d:1,a:["yoghurt","ymer","skyr","a38","tykmælk"],g:["Laktose"],l:2},
+ {n:"Is (fløde-)",d:1,a:["flødeis","is","softice"],g:["Laktose"],l:2},
+ {n:"Blød ost (hytteost, ricotta, flødeost)",lim:"2 spsk er lav, ½ dl eller mere er høj",thr:{u:"dl",v:0.3},d:1,a:["hytteost","ricotta","flødeost","philadelphia","mascarpone","kvark"],g:["Laktose"],l:1},
+ {n:"Hård ost (cheddar, parmesan, gouda)",a:["cheddar","parmesan","gouda","danbo","ost"],g:[],l:0},
+ {n:"Feta / brie / camembert",a:["feta","brie","camembert","mozzarella"],g:[],l:0},
+ {n:"Champignon",a:["champignon","svampe","østershat","portobello"],g:["Mannitol"],l:2},
+ {n:"Blomkål",a:["blomkål"],g:["Mannitol"],l:2},
+ {n:"Sukkerærter",a:["sukkerært"],g:["Mannitol","Fruktaner"],l:2},
+ {n:"Artiskok",a:["artiskok"],g:["Fruktaner","Fruktose"],l:2},
+ {n:"Asparges",a:["asparges"],g:["Fruktose","Fruktaner"],l:2},
+ {n:"Cashewnødder",a:["cashew"],g:["GOS","Fruktaner"],l:2},
+ {n:"Pistacienødder",a:["pistacie"],g:["GOS","Fruktaner"],l:2},
+ {n:"Sødemidler (sorbitol, xylitol, tyggegummi)",a:["sorbitol","xylitol","maltitol","tyggegummi","sukkerfri"],g:["Sorbitol"],l:2},
+ {n:"Inulin / fibertilsætning",a:["inulin","cikorie"],g:["Fruktaner"],l:2},
+ {n:"Avocado",lim:"⅛ avocado (ca. 30 g) er lav, ¼ eller mere er høj",thr:{u:"stk",v:0.15},a:["avocado"],g:["Sorbitol"],l:1},
+ {n:"Sød kartoffel",lim:"75 g er lav, 100 g eller mere er høj",thr:{u:"g",v:75},a:["sød kartoffel","søde kartofler","batat"],g:["Mannitol"],l:1},
+ {n:"Majs (kolbe)",lim:"½ kolbe er lav, en hel er høj",thr:{u:"stk",v:0.5},a:["majs","majskolbe"],g:["Sorbitol"],l:1},
+ {n:"Bladselleri",lim:"¼ stang (ca. 10 cm) er lav, ½ stang er høj",thr:{u:"stk",v:0.25},a:["bladselleri","selleri"],g:["Mannitol"],l:1},
+ {n:"Mandler",lim:"10 stk er lav, 20 er høj",thr:{u:"stk",v:10},a:["mandel","mandler"],g:["GOS"],l:1},
+ {n:"Hasselnødder",lim:"10 stk er lav, 30 er høj",thr:{u:"stk",v:10},a:["hasselnød"],g:["GOS"],l:1},
+ {n:"Rødbede",lim:"2 skiver (20 g) er lav, 4 skiver er høj",thr:{u:"g",v:20},a:["rødbede"],g:["Fruktaner"],l:1},
+ {n:"Fennikel",lim:"1 dl er lav, 1½ dl er høj",thr:{u:"dl",v:1},a:["fennikel"],g:["Fruktaner","Mannitol"],l:1},
+ {n:"Granatæble",lim:"¼ lille (ca. 40 g) er lav, ½ er høj",thr:{u:"stk",v:0.25},a:["granatæble"],g:["Fruktaner"],l:1},
+ {n:"Banan (moden)",lim:"⅓ banan er lav, en hel er høj",thr:{u:"stk",v:0.34},a:["banan","bananer"],g:["Fruktaner"],l:1},
+ {n:"Havregryn / havregrød",lim:"1 dl (ca. 50 g) er lav, 2 dl er høj",thr:{u:"dl",v:1},a:["havregryn","havregrød","havre","grød"],g:["Fruktaner","GOS"],l:1},
+ {n:"Havremælk",lim:"½ dl er lav, 1 dl eller mere er høj",thr:{u:"dl",v:0.5},a:["havremælk","havredrik"],g:["Fruktaner"],l:1},
+ {n:"Ærter",lim:"1 spsk er lav, ½ dl er høj",thr:{u:"dl",v:0.2},a:["ærter","ært"],g:["GOS"],l:1},
+ {n:"Broccoli",lim:"1½ dl buketter er lav, 2 dl stilk er høj",thr:{u:"dl",v:1.5},a:["broccoli"],g:["Fruktose"],l:1},
+ {n:"Rosenkål",lim:"2 stk er lav, 6 er høj",thr:{u:"stk",v:2},a:["rosenkål"],g:["Fruktaner"],l:1},
+ {n:"Kål (hvid-, spids-, savoy-)",lim:"1 dl hvidkål er lav, 2 dl er høj (savoykål: ½ dl)",thr:{u:"dl",v:1},a:["hvidkål","spidskål","savoykål","kål"],g:["Fruktaner","Sorbitol"],l:1},
+ {n:"Squash",lim:"65 g (ca. ⅓ squash) er lav, 100 g er høj",thr:{u:"g",v:65},a:["squash","zucchini"],g:["Fruktaner"],l:1},
+ {n:"Græsk yoghurt",lim:"1 spsk (ca. 25 g) er lav, ½ dl er høj",thr:{u:"dl",v:0.25},d:1,a:["græsk yoghurt"],g:["Laktose"],l:1},
+ {n:"Chokolade (mælke-)",lim:"20 g (5 stykker) er lav, 30 g er høj",thr:{u:"g",v:20},d:1,a:["chokolade","mælkechokolade"],g:["Laktose"],l:1},
+ {n:"Blåbær",lim:"40 g (en lille håndfuld) er lav, 1 dl er høj",thr:{u:"g",v:40},a:["blåbær"],g:["Fruktaner"],l:1},
+ {n:"Surdejsbrød af spelt",lim:"2 skiver er lav, 3 eller flere er høj",thr:{u:"stk",v:2},w:1,a:["spelt","surdej"],g:["Fruktaner"],l:1},
+ {n:"Glutenfrit brød",a:["glutenfri"],g:[],l:0},
+ {n:"Kartoffel",a:["kartoffel","kartofler","pommes"],g:[],l:0},
+ {n:"Ris",a:["ris","risotto","risnudler","riskager","rismælk"],g:[],l:0},
+ {n:"Quinoa",a:["quinoa"],g:[],l:0},
+ {n:"Boghvede",a:["boghvede"],g:[],l:0},
+ {n:"Jordbær",a:["jordbær"],g:[],l:0},
+ {n:"Hindbær",a:["hindbær"],g:[],l:0},
+ {n:"Kiwi",a:["kiwi"],g:[],l:0},
+ {n:"Appelsin / clementin",a:["appelsin","clementin","mandarin"],g:[],l:0},
+ {n:"Citron / lime",a:["citron","lime"],g:[],l:0},
+ {n:"Ananas",a:["ananas"],g:[],l:0},
+ {n:"Druer",a:["drue","druer"],g:[],l:0},
+ {n:"Honningmelon / cantaloupe",a:["honningmelon","cantaloupe"],g:[],l:0},
+ {n:"Gulerod",a:["gulerod","gulerødder"],g:[],l:0},
+ {n:"Agurk",a:["agurk"],g:[],l:0},
+ {n:"Tomat",a:["tomat"],g:[],l:0},
+ {n:"Salat / spinat / rucola",a:["salat","spinat","rucola"],g:[],l:0},
+ {n:"Peberfrugt",a:["peberfrugt","peber"],g:[],l:0},
+ {n:"Aubergine",a:["aubergine"],g:[],l:0},
+ {n:"Grønne bønner",a:["grønne bønner","haricots","bønnespirer"],g:[],l:0},
+ {n:"Æg",a:["æg","omelet"],g:[],l:0},
+ {n:"Kød / fjerkræ / fisk",a:["kød","oksekød","svinekød","kylling","kalkun","laks","torsk","fisk","tun","rejer","skinke","bacon"],g:[],l:0},
+ {n:"Fast tofu / tempeh",a:["tofu","tempeh"],g:[],l:0},
+ {n:"Smør / olie",a:["smør","olie","olivenolie"],g:[],l:0},
+ {n:"Ahornsirup / sukker",a:["ahornsirup","sukker","sirup"],g:[],l:0},
+ {n:"Jordnødder / valnødder / pekan / macadamia",a:["jordnød","peanut","valnød","pekan","macadamia"],g:[],l:0},
+ {n:"Chia / hørfrø / solsikkekerner",a:["chia","hørfrø","solsikke","græskarkerner"],g:[],l:0},
+ {n:"Kaffe / sort og grøn te",a:["kaffe","te","grøn te"],g:[],l:0},
+ {n:"Kamillete / fennikelte",a:["kamille","fennikelte"],g:["Fruktaner"],l:2},
+ {n:"Rødvin / hvidvin / spiritus",a:["vin","rødvin","hvidvin","gin","vodka","whisky"],g:[],l:0},
+
+ /* Danske hverdagsfødevarer og retter */
+ {n:"Rundstykker / boller / flûtes / pitabrød",w:1,a:["rundstykke","rundstykker","flûte","flute","pitabrød","pita","bagel","croissant","tebirkes","birkes","grovbrød","fuldkornsbrød","toastbrød","toast","sandwich","burgerbolle"],g:["Fruktaner"],l:2},
+ {n:"Knækbrød (rug)",w:1,a:["knækbrød","rugfras","rugkiks"],g:["Fruktaner"],l:2},
+ {n:"Müsli / granola / müslibar",w:1,a:["müsli","musli","granola","müslibar","mysli"],g:["Fruktaner","Fruktose"],l:2},
+ {n:"Cornflakes / havrefras",lim:"2 dl er lav, mere kan give problemer",thr:{u:"dl",v:2},w:1,a:["cornflakes","havrefras","morgenmadsprodukt"],g:["Fruktaner"],l:1},
+ {n:"Kartoffelchips (naturel)",a:["kartoffelchips","chips","franske kartofler"],g:[],l:0},
+ {n:"Chips med løg-/hvidløgssmag (sour cream, paprika)",lim:"en lille skål er lav; mængden af løgpulver stiger med posen",thr:{u:"g",v:30},o:1,a:["sour cream","paprikachips","løgchips"],g:["Fruktaner"],l:1},
+ {n:"Saltstænger / kiks / tuc",w:1,a:["saltstænger","saltstang","tuc","kiks","småkager","mariekiks"],g:["Fruktaner"],l:2},
+ {n:"Popcorn",a:["popcorn"],g:[],l:0},
+ {n:"Nachos / majschips / majstortilla",a:["nachos","majschips","tortillachips","majstortilla"],g:[],l:0},
+ {n:"Pommes frites",a:["pommes","fritter","pomfritter"],g:[],l:0},
+ {n:"Frikadeller (med løg og mel)",o:1,w:1,a:["frikadelle","frikadeller","hakkebøf","farsbrød","kødboller","medister"],g:["Fruktaner"],l:2},
+ {n:"Leverpostej",lim:"et tyndt lag er lav, et tykt lag er mængdeafhængig pga. løg og mel",thr:{u:"stk",v:1},o:1,w:1,a:["leverpostej","postej"],g:["Fruktaner"],l:1},
+ {n:"Spegepølse / salami / pølser",lim:"1–2 skiver er lav; hele pølser med hvidløg er høj",thr:{u:"stk",v:2},o:1,a:["spegepølse","salami","pølse","pølser","hotdog","wiener","pepperoni","chorizo"],g:["Fruktaner"],l:1},
+ {n:"Sild (marineret med løg)",lim:"1 stykke uden løgringe er lav, med løg er høj",thr:{u:"stk",v:1},o:1,a:["sild","karrysild"],g:["Fruktaner"],l:1},
+ {n:"Makrel i tomat / røget makrel / fiskefilet",a:["makrel","fiskefilet","fiskefrikadelle","fiskefrikadeller","laksefilet","røget laks"],g:[],l:0},
+ {n:"Remoulade / ketchup",lim:"1 spsk er lav, 2 eller flere er høj",thr:{u:"dl",v:0.15},o:1,a:["remoulade","ketchup","chilisauce","bbq"],g:["Fruktaner","Fruktose"],l:1},
+ {n:"Mayonnaise / sennep / soja / bearnaise",a:["mayonnaise","mayo","sennep","soja","sojasauce","bearnaise"],g:[],l:0},
+ {n:"Pesto / tzatziki / aioli",d:1,o:1,a:["pesto","tzatziki","aioli"],g:["Fruktaner","Laktose"],l:2},
+ {n:"Brun sovs / flødesovs / bouillon",lim:"1 dl er lav-moderat, 2 dl er høj",thr:{u:"dl",v:1},d:1,o:1,w:1,a:["brun sovs","sovs","flødesovs","bouillon","bouillonterning","fond"],g:["Fruktaner","Laktose"],l:1},
+ {n:"Kartoffelmos (med mælk)",lim:"1 dl er lav, 2 dl er høj",thr:{u:"dl",v:1},d:1,a:["kartoffelmos","mos"],g:["Laktose"],l:1},
+ {n:"Rødkål",lim:"½ dl er lav, 1 dl er høj",thr:{u:"dl",v:0.5},a:["rødkål"],g:["Fruktaner","Sorbitol"],l:1},
+ {n:"Agurkesalat / syltede rødbeder / asier",a:["agurkesalat","asier","syltede"],g:[],l:0},
+ {n:"Flæskesteg / stegt flæsk / bøf",a:["flæskesteg","flæsk","bøf","steak","kotelet","lammekølle","and","kalkunbryst"],g:[],l:0},
+ {n:"Smørrebrød / rugbrødsmad",w:1,a:["smørrebrød","rugbrødsmad","klemme","madpakke"],g:["Fruktaner"],l:2},
+ {n:"Lasagne / bolognese / karryret (løg, hvidløg, hvede)",o:1,w:1,a:["lasagne","bolognese","kødsovs","karry","chili con carne","gryderet","tomatsuppe","suppe"],g:["Fruktaner","GOS"],l:2},
+ {n:"Burger / pizza / pølsebrød",o:1,w:1,a:["burger","pølsebrød","fladbrød","wrap"],g:["Fruktaner"],l:2},
+ {n:"Sushi / ris med fisk",a:["sushi","maki"],g:[],l:0},
+ {n:"Risengrød / risalamande",d:1,a:["risengrød","risalamande","ris à l'amande"],g:["Laktose"],l:2},
+ {n:"Øllebrød",w:1,a:["øllebrød"],g:["Fruktaner"],l:2},
+ {n:"Koldskål / kærnemælk / kefir",d:1,a:["koldskål","kærnemælk","kefir"],g:["Laktose"],l:2},
+ {n:"Kammerjunker / æbleskiver / pandekager / vafler",d:1,w:1,a:["kammerjunker","æbleskiver","pandekage","pandekager","vaffel","vafler","crepes"],g:["Fruktaner","Laktose"],l:2},
+ {n:"Kanelsnegl / flødebolle / lagkage / kager",d:1,w:1,a:["kanelsnegl","flødebolle","flødeboller","lagkage","brunsviger","drømmekage","chokoladekage","muffin","cookie","tærte","tebolle"],g:["Fruktaner","Laktose"],l:2},
+ {n:"Bananbrød / rugbrødskage",w:1,a:["bananbrød"],g:["Fruktaner"],l:2},
+ {n:"Lakrids",lim:"et par stykker er lav, en pose er høj",thr:{u:"stk",v:3},w:1,a:["lakrids","lakridser"],g:["Fruktaner"],l:1},
+ {n:"Vingummi / bolsjer (med sukker)",a:["vingummi","bolsje","bolsjer","haribo","slik","karameller"],g:[],l:0},
+ {n:"Marcipan / nougat",lim:"20 g er lav, 40 g er høj",thr:{u:"g",v:20},a:["marcipan","nougat"],g:["GOS"],l:1},
+ {n:"Mørk chokolade",a:["mørk chokolade"],g:[],l:0},
+ {n:"Cola / sodavand / danskvand",a:["cola","sodavand","danskvand","faxe kondi","fanta","sprite"],g:[],l:0},
+ {n:"Æblejuice / saft / smoothie",lim:"1 dl er lav for de fleste safttyper, æblejuice er høj allerede ved ½ dl",thr:{u:"dl",v:1},a:["saft","saftevand","smoothie","juice"],g:["Fruktose","Sorbitol"],l:1},
+ {n:"Appelsinjuice",a:["appelsinjuice"],g:[],l:0},
+ {n:"Energigel / sportsdrik",lim:"1 gel eller 2½ dl sportsdrik er typisk lav; flere gels tæt på hinanden lægger sig sammen",thr:{u:"stk",v:1},a:["energigel","gel","sportsdrik","isotonisk","elektrolyt","maurten","high5"],g:["Fruktose"],l:1},
+ {n:"Druesukker / dextrose",a:["druesukker","dextrose","glukose"],g:[],l:0},
+ {n:"Energibar / proteinbar",lim:"½ bar er ofte lav, en hel er høj",thr:{u:"stk",v:0.5},w:1,a:["energibar","proteinbar","bar"],g:["Fruktaner","Fruktose"],l:1},
+ {n:"Proteinpulver (valle)",lim:"isolat er lav; koncentrat 1 scoop er moderat",thr:{u:"stk",v:1},d:1,a:["proteinpulver","whey","valleprotein","proteinshake"],g:["Laktose"],l:1},
+ {n:"Hvedemel / paneret / friturestegt",w:1,a:["hvedemel","paneret","panering","rasp","friturestegt","tempura"],g:["Fruktaner"],l:2},
+ {n:"Tørret kød / pålæg (skinke, roastbeef, kylling)",a:["pålæg","roastbeef","hamburgerryg","kyllingebryst","kalkunpålæg"],g:[],l:0},
+ {n:"Kartoffelsalat (mayo) / pastasalat",lim:"en lille portion er typisk lav; en stor er høj pga. løg/pasta",thr:{u:"dl",v:1.5},o:1,w:1,a:["kartoffelsalat","pastasalat"],g:["Fruktaner"],l:1},
+ {n:"Æggekage / røræg / spejlæg",a:["æggekage","røræg","spejlæg","omelet"],g:[],l:0},
+ {n:"Nudler (ris-) / rispapir",a:["risnudler","rispapir","glasnudler"],g:[],l:0},
+ {n:"Kvinoa / hirse / polenta",a:["hirse","polenta","majsgrød"],g:[],l:0},
+ {n:"Øl (i mængder)",lim:"1 glas (ca. 3½ dl) er lav, mere er høj",thr:{u:"dl",v:3.5},w:1,a:["øl","pilsner","fadøl"],g:["Fruktaner"],l:1},
+];
+const LVL=["lav","mængdeafhængig","høj"];
+function norm(s){ return " "+s.toLowerCase().replace(/[.,;:()\n]/g," ").replace(/\s+/g," ")+" "; }
+const NEG={ laktose:"d", mælk:"d", mælkefri:"d", laktosefri:"d", gluten:"w", hvede:"w", mel:"w", hvedemel:"w", glutenfri:"w", hvedefri:"w", løg:"o", hvidløg:"o", løgfri:"o", fruktaner:"Fruktaner", gos:"GOS", fruktose:"Fruktose", sorbitol:"Sorbitol", mannitol:"Mannitol" };
+const NEGLABEL={d:"uden laktose",w:"uden hvede/gluten",o:"uden løg"};
+function findNeg(text){
+  const t=text.toLowerCase(); const out=new Set();
+  /* "uden X", "uden X og Y", "uden X, Y" */
+  for(const m of t.matchAll(/\buden\s+([^.;\n]+)/g)){ m[1].split(/\s*(?:,|\bog\b|\beller\b)\s*/).forEach(w=>{ w=w.trim().split(" ")[0]; if(NEG[w]) out.add(NEG[w]); }); }
+  /* "laktosefri", "gluten-fri", "glutenfrit" */
+  for(const m of t.matchAll(/\b([a-zæøå]+)-?fri[t]?\b/g)){ const k=m[1]+"fri"; if(NEG[k]) out.add(NEG[k]); }
+  return [...out];
+}
+const NUMW={en:1,et:1,"én":1,to:2,tre:3,fire:4,fem:5,seks:6,syv:7,otte:8,ni:9,ti:10,halv:0.5,halvt:0.5,halvanden:1.5,kvart:0.25,"½":0.5,"¼":0.25,"⅓":0.34,"¾":0.75,"⅛":0.125};
+const UNITS={dl:["dl",1],ml:["dl",0.01],l:["dl",10],liter:["dl",10],kop:["dl",2.5],kopper:["dl",2.5],spsk:["dl",0.15],tsk:["dl",0.05],glas:["dl",2.5],g:["g",1],gram:["g",1],kg:["g",1000],stk:["stk",1],styk:["stk",1],stykker:["stk",1],skive:["stk",1],skiver:["stk",1],"håndfuld":["stk",10],"håndfulde":["stk",10],gels:["stk",1],bar:["stk",1],barer:["stk",1]};
+function parseQty(text,f){
+  const t=text.toLowerCase();
+  for(const a of f.a){ const i=t.indexOf(a); if(i<0) continue;
+    /* op til 4 ord før fødevaren */
+    const before=t.slice(Math.max(0,i-32),i).split(/[\s,]+/).filter(Boolean).slice(-4);
+    let num=null,unit=null;
+    /* ellers op til 3 ord efter ("havregryn 1 dl") */
+    const after=t.slice(i+a.length).split(/[\s,]+/).filter(Boolean).slice(0,3);
+    const hasNumBefore=before.some(w=>!isNaN(parseFloat(w.replace(",",".")))||NUMW[w]!=null);
+    const scan=hasNumBefore?before:after.filter(w=>/^[\d,.]+$/.test(w)||NUMW[w]!=null||UNITS[w]);
+    for(const w of scan){ const n=parseFloat(w.replace(",","."));
+      if(!isNaN(n)) { num=n; unit=null; continue; }
+      if(NUMW[w]!=null){ num=NUMW[w]; unit=null; continue; }
+      if(UNITS[w]&&num!=null){ unit=UNITS[w]; } }
+    if(num==null) return null;
+    if(!unit){ /* "2 bananer", "halv avocado", "en håndfuld mandler" */
+      const isHalf=/^halv/.test(a)||before.includes("halv")||before.includes("halvt");
+      unit=["stk",1]; }
+    return {u:unit[0],v:num*unit[1]}; }
+  return null;
+}
+function assess(text){
+  const t=norm(text); const hits=[]; const neg=findNeg(text);
+  FOODS.forEach(f=>{ if(f.a.some(a=>a.length>=4?t.includes(" "+a):t.includes(" "+a+" "))) hits.push(Object.assign({},f)); });
+  if(hits.some(f=>f.n==="Grønne bønner")){ const i=hits.findIndex(f=>f.n.startsWith("Bønner")); if(i>=0) hits.splice(i,1); }
+  if(neg.includes("d")){ const i=hits.findIndex(f=>f.n==="Mælk"); if(i>=0&&hits.some(f=>f.n==="Laktosefri mælk")) hits.splice(i,1); }
+  if(neg.includes("w")){ const i=hits.findIndex(f=>f.n.startsWith("Hvede")); if(i>=0&&hits.some(f=>f.n==="Glutenfrit brød")) hits.splice(i,1); }
+  hits.forEach(f=>{ f.eg=f.g.slice(); f.adj=[];
+    const drop=(grp,key)=>{ if(f.eg.includes(grp)){ f.eg=f.eg.filter(x=>x!==grp); f.adj.push(NEGLABEL[key]||("uden "+grp.toLowerCase())); } };
+    if(neg.includes("d")&&f.d) drop("Laktose","d");
+    if(f.eg.includes("Fruktaner")&&(f.w||f.o)){
+      const wNeg=f.w&&neg.includes("w"), oNeg=f.o&&neg.includes("o");
+      const remains=(f.w&&!wNeg)||(f.o&&!oNeg);
+      if(wNeg) f.adj.push(NEGLABEL.w); if(oNeg) f.adj.push(NEGLABEL.o);
+      if((wNeg||oNeg)&&!remains) f.eg=f.eg.filter(x=>x!=="Fruktaner");
+    }
+    neg.filter(n=>GROUPS.includes(n)).forEach(g=>drop(g,g));
+    f.el=f.eg.length?f.l:(f.l===0?0:0);
+    f.qty=null; f.qtyMsg="";
+    if(f.thr&&f.eg.length){ const q=parseQty(text,f); if(q&&q.u===f.thr.u){ f.qty=q;
+        if(q.v>f.thr.v*1.6){ f.el=2; f.qtyMsg="over grænsen"; } else if(q.v>f.thr.v){ f.el=1; f.qtyMsg="omkring grænsen"; } else { f.el=0; f.qtyMsg="inden for lav mængde"; } } }
+    /* niveau falder til lav hvis alle grupper er fjernet; ellers uændret */
+    if(f.eg.length && f.eg.length<f.g.length && f.l===2) f.el=1;
+  });
+  const lvl=hits.length?Math.max(...hits.map(f=>f.el)):null;
+  const groups=[...new Set(hits.flatMap(f=>f.eg))];
+  const adj=[...new Set(hits.flatMap(f=>f.adj))];
+  return {hits,lvl,groups,adj};
+}
+function lvlDot(l){ return `<span class="grade" style="background:var(--g${l===2?3:l===1?1:0})"></span>`; }
+let touched=false;
+function renderVurd(){
+  const txt=$("#m-mad").value; const box=$("#m-vurd");
+  if(!txt.trim()){ box.innerHTML=""; return; }
+  const v=assess(txt);
+  if(!v.hits.length){ box.innerHTML="Ingen fødevarer fra listen genkendt. Markér grupperne selv, hvis du kender dem."; return; }
+  const por=segVal("m-por");
+  const hi=v.hits.filter(f=>f.el===2), mid=v.hits.filter(f=>f.el===1);
+  let verdict;
+  if(v.lvl===2) verdict="Høj FODMAP: "+hi.map(f=>f.n+(f.qtyMsg?" ("+f.qtyMsg+")":"")).join(", ");
+  else if(v.lvl===1) verdict=(por==="stor"?"Stor portion af mængdeafhængige fødevarer: ":"Mængdeafhængig: ")+mid.map(f=>f.n).join(", ");
+  else verdict="Lav FODMAP ud fra det genkendte"+(v.hits.some(f=>f.qtyMsg)?" og de angivne mængder":"");
+  const limits=v.hits.filter(f=>f.lim&&f.eg.length).map(f=>`<div>· <strong>${f.n.split(" (")[0]}:</strong> ${f.lim}${f.qty?` — du skrev ${f.qty.v%1?f.qty.v.toFixed(2).replace(".",","):f.qty.v} ${f.qty.u}: ${f.qtyMsg}`:""}</div>`).join("");
+  const stack=v.hits.filter(f=>f.lim&&f.eg.length&&f.el<2).length>=2?`<div>Flere mængdeafhængige fødevarer i samme måltid lægger sig sammen. Hold hver under sin grænse, eller fordel dem over dagen.</div>`:"";
+  box.innerHTML=`<div>${lvlDot(v.lvl)}<strong>${verdict}</strong></div>
+    ${v.adj.length?`<div>Tilpasset: ${v.adj.join(", ")}</div>`:""}
+    ${limits?`<div style="margin-top:4px">${limits}</div>`:""}${stack}
+    <div style="margin-top:4px">${v.hits.map(f=>`<span class="tag">${f.n}${f.eg.length?" · "+f.eg.join("/"):""}${f.adj.length?` <s>${f.g.filter(g=>!f.eg.includes(g)).join("/")}</s>`:""}</span>`).join("")}</div>`;
+  if(!touched){ chipsClear("m-grp"); document.querySelectorAll("#m-grp .chip").forEach(b=>{ if(v.groups.includes(b.textContent)) b.classList.add("on"); }); }
+}
+let D={meals:[],runs:[],syms:[],tests:[],active:null};
+
+function load(){ try{ const r=localStorage.getItem(KEY); if(r) D=Object.assign(D,JSON.parse(r)); }catch(e){} }
+function save(){ try{ localStorage.setItem(KEY,JSON.stringify(D)); }catch(e){ toast("Kunne ikke gemme – browseren tillader ikke lagring"); } }
+function toast(m){ const t=document.getElementById("toast"); t.textContent=m; t.classList.add("on"); setTimeout(()=>t.classList.remove("on"),1800); }
+function nowLocal(){ const d=new Date(); d.setMinutes(d.getMinutes()-d.getTimezoneOffset()); return d.toISOString().slice(0,16); }
+function fmt(iso){ const d=new Date(iso); return d.toLocaleDateString("da-DK",{day:"numeric",month:"short"})+" "+d.toLocaleTimeString("da-DK",{hour:"2-digit",minute:"2-digit"}); }
+function day(iso){ return new Date(iso).toLocaleDateString("da-DK",{weekday:"short",day:"numeric",month:"short"}); }
+const $=s=>document.querySelector(s);
+
+/* chips & segs */
+function chips(id,list){ const c=$("#"+id); c.innerHTML=""; list.forEach(g=>{ const b=document.createElement("button"); b.className="chip"; b.type="button"; b.textContent=g; b.onclick=()=>{ b.classList.toggle("on"); if(id==="m-grp") touched=true; }; c.appendChild(b); }); }
+function chipsOn(id){ return [...document.querySelectorAll("#"+id+" .chip.on")].map(b=>b.textContent); }
+function chipsClear(id){ document.querySelectorAll("#"+id+" .chip").forEach(b=>b.classList.remove("on")); }
+document.querySelectorAll(".seg").forEach(s=>s.addEventListener("click",e=>{ const b=e.target.closest("button"); if(!b) return; s.querySelectorAll("button").forEach(x=>x.classList.remove("on")); b.classList.add("on"); }));
+function segVal(id){ return $("#"+id+" .on").dataset.v; }
+chips("m-grp",GROUPS); chips("s-type",STYPES);
+
+/* kind switch */
+$("#kind").addEventListener("click",e=>{ const b=e.target.closest("button"); if(!b) return;
+  $("#kind").querySelectorAll("button").forEach(x=>x.classList.toggle("on",x===b));
+  ["maaltid","loeb","symptom"].forEach(k=>$("#f-"+k).hidden=(k!==b.dataset.k)); });
+
+/* tabs */
+document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>{ document.querySelectorAll(".tab").forEach(x=>x.classList.toggle("on",x===t));
+  document.querySelectorAll(".view").forEach(v=>v.classList.toggle("on",v.id==="v-"+t.dataset.v)); render(); });
+
+/* save handlers */
+$("#m-mad").addEventListener("input",renderVurd); $("#m-por").addEventListener("click",()=>setTimeout(renderVurd,0));
+$("#food-q").addEventListener("input",()=>{ const q=$("#food-q").value.trim().toLowerCase(); const r=$("#food-r"); if(q.length<2){ r.innerHTML=""; return; }
+  const hits=FOODS.filter(f=>f.n.toLowerCase().includes(q)||f.a.some(a=>a.includes(q))).slice(0,8);
+  r.innerHTML=hits.length?hits.map(f=>`<div class="entry"><div class="t">${lvlDot(f.l)}${LVL[f.l]}</div><div>${f.n}<div class="k">${f.g.length?f.g.join(", "):"ingen FODMAP-gruppe"}${f.lim?"<br>"+f.lim:""}</div></div><div></div></div>`).join(""):"<div class=\"empty\">Ikke på listen.</div>"; });
+$("#m-save").onclick=()=>{ const mad=$("#m-mad").value.trim(); if(!mad){toast("Skriv hvad du spiste"); return;}
+  D.meals.push({id:Date.now(),t:$("#m-t").value||nowLocal(),mad,grp:chipsOn("m-grp"),por:segVal("m-por"),lvl:assess(mad).lvl,adj:assess(mad).adj,src:touched?"bekræftet":"auto"}); save();
+  $("#m-mad").value=""; chipsClear("m-grp"); $("#m-vurd").innerHTML=""; touched=false; $("#m-t").value=nowLocal(); toast("Måltid gemt"); render(); };
+$("#l-save").onclick=()=>{ D.runs.push({id:Date.now(),t:$("#l-t").value||nowLocal(),min:+$("#l-min").value||null,km:+$("#l-km").value||null,int:segVal("l-int"),mave:+segVal("l-mave")}); save();
+  $("#l-min").value=""; $("#l-km").value=""; $("#l-t").value=nowLocal(); toast("Løbetur gemt"); render(); };
+$("#s-save").onclick=()=>{ const ty=chipsOn("s-type"); if(!ty.length){toast("Vælg mindst én type"); return;}
+  D.syms.push({id:Date.now(),t:$("#s-t").value||nowLocal(),ty,grad:+segVal("s-grad"),ctx:segVal("s-ctx"),note:$("#s-note").value.trim()}); save();
+  chipsClear("s-type"); $("#s-note").value=""; $("#s-t").value=nowLocal(); toast("Symptom gemt"); render(); };
+
+function del(kind,id){ if(!confirm("Slet registreringen?")) return; D[kind]=D[kind].filter(x=>x.id!==id); save(); render(); }
+function gradeDot(g){ return `<span class="grade" style="background:var(--g${g})"></span>`; }
+
+/* recent */
+function renderRecent(){
+  const all=[...D.meals.map(m=>({k:"meals",t:m.t,id:m.id,h:`${m.lvl!=null?lvlDot(m.lvl):""}${m.mad}<div class="k">${m.grp.length?m.grp.map(g=>`<span class="tag">${g}</span>`).join(""):"<span class='tag'>Ingen FODMAP-gruppe</span>"} · ${m.por}${m.adj&&m.adj.length?" · "+m.adj.join(", "):""}${m.src?` · <em>${m.src}</em>`:""}</div>`})),
+    ...D.runs.map(r=>({k:"runs",t:r.t,id:r.id,h:`${gradeDot(r.mave)}Løbetur ${r.km?r.km+" km":""} ${r.min?r.min+" min":""}<div class="k">${r.int} · mave: ${["rolig","lidt uro","generende","måtte stoppe"][r.mave]}</div>`})),
+    ...D.syms.map(s=>({k:"syms",t:s.t,id:s.id,h:`${gradeDot(s.grad)}${s.ty.join(", ")}<div class="k">${["","mild","moderat","kraftig"][s.grad]} · ${s.ctx==="ingen"?"uden løb":s.ctx+" løb"}${s.note?" · "+s.note:""}</div>`}))]
+    .sort((a,b)=>b.t.localeCompare(a.t)).slice(0,12);
+  $("#recent").innerHTML=all.length?all.map(e=>`<div class="entry"><div class="t">${fmt(e.t)}</div><div>${e.h}</div><button class="del" onclick="del('${e.k}',${e.id})">Slet</button></div>`).join(""):`<div class="empty">Ingen registreringer endnu. Start med dagens måltider.</div>`;
+}
+
+/* tests */
+function renderTest(){
+  const box=$("#testbox"); const a=D.active;
+  if(!a){
+    const done=D.tests.map(t=>t.grp);
+    box.innerHTML=`<h2 style="margin-top:0">Start en genintroduktion</h2>
+      <p class="note">Én gruppe ad gangen, tre dage med stigende mængde, og en løbetur inden for 24 timer efter mindst én af dagene. Hold pause på 3 dage før næste gruppe.</p>
+      <label>Gruppe</label><select id="t-grp">${GROUPS.map(g=>`<option ${done.includes(g)?"":""}>${g}${done.includes(g)?" (testet)":""}</option>`).join("")}</select>
+      <label>Testfødevare</label><input id="t-food" placeholder="fx 1 skive hvedebrød">
+      <button class="btn" id="t-start">Start test</button>`;
+    $("#t-start").onclick=()=>{ const food=$("#t-food").value.trim(); if(!food){toast("Skriv testfødevaren"); return;}
+      D.active={id:Date.now(),grp:$("#t-grp").value.replace(" (testet)",""),food,start:nowLocal().slice(0,10),days:[]}; save(); renderTest(); };
+    return;
+  }
+  const dayN=a.days.length+1; const doses=["lille","mellem","stor"];
+  box.innerHTML=`<h2 style="margin-top:0">${a.grp} · dag ${Math.min(dayN,3)} af 3</h2>
+    <p class="note">${a.food}. Startet ${day(a.start)}.</p>
+    ${a.days.map((d,i)=>`<div class="entry"><div class="t">Dag ${i+1}</div><div>${gradeDot(d.grad)}${doses[d.dose]} mængde · ${["ingen symptomer","mild","moderat","kraftig"][d.grad]}${d.run?" · løb":""}</div><div></div></div>`).join("")}
+    ${dayN<=3?`<label>Mængde i dag</label>
+      <div class="seg" id="t-dose"><button data-v="0" ${dayN===1?"class=on":""}>Lille</button><button data-v="1" ${dayN===2?"class=on":""}>Mellem</button><button data-v="2" ${dayN===3?"class=on":""}>Stor</button></div>
+      <label>Symptomer i løbet af dagen</label>
+      <div class="seg" id="t-grad"><button data-v="0" class="on">Ingen</button><button data-v="1">Mild</button><button data-v="2">Moderat</button><button data-v="3">Kraftig</button></div>
+      <label>Løb inden for 24 timer?</label>
+      <div class="seg" id="t-run"><button data-v="0" class="on">Nej</button><button data-v="1">Ja</button></div>
+      <button class="btn" id="t-day">Gem dag ${dayN}</button>`:""}
+    <label>Afslut testen</label>
+    <div class="seg" id="t-res"><button data-v="tåles" class="on">Tåles</button><button data-v="tåles delvist">Tåles delvist</button><button data-v="tåles ikke">Tåles ikke</button></div>
+    <button class="btn quiet" id="t-end">Afslut og gem resultat</button>
+    <button class="btn quiet" id="t-cancel">Afbryd testen</button>`;
+  box.querySelectorAll(".seg").forEach(s=>s.addEventListener("click",e=>{ const b=e.target.closest("button"); if(!b) return; s.querySelectorAll("button").forEach(x=>x.classList.remove("on")); b.classList.add("on"); }));
+  const td=$("#t-day"); if(td) td.onclick=()=>{ a.days.push({dose:+segVal("t-dose"),grad:+segVal("t-grad"),run:+segVal("t-run")===1}); save(); renderTest(); };
+  $("#t-end").onclick=()=>{ if(!a.days.length){toast("Gem mindst én dag først"); return;} D.tests.push({...a,end:nowLocal().slice(0,10),res:segVal("t-res")}); D.active=null; save(); toast("Test gemt"); renderTest(); };
+  $("#t-cancel").onclick=()=>{ if(confirm("Afbryd testen uden at gemme?")){ D.active=null; save(); renderTest(); } };
+  $("#tests-done").innerHTML=D.tests.length?D.tests.map(t=>`<div class="entry"><div class="t">${day(t.start)}</div><div><strong>${t.grp}</strong> – ${t.res}<div class="k">${t.food} · ${t.days.length} dage</div></div><button class="del" onclick="del('tests',${t.id})">Slet</button></div>`).join(""):`<div class="empty">Ingen gennemførte tests.</div>`;
+}
+function renderDone(){ $("#tests-done").innerHTML=D.tests.length?D.tests.map(t=>`<div class="entry"><div class="t">${day(t.start)}</div><div><strong>${t.grp}</strong> – ${t.res}<div class="k">${t.food} · ${t.days.length} dage</div></div><button class="del" onclick="del('tests',${t.id})">Slet</button></div>`).join(""):`<div class="empty">Ingen gennemførte tests.</div>`; }
+
+/* overview */
+function analyse(){
+  return D.runs.slice().sort((a,b)=>b.t.localeCompare(a.t)).map(r=>{
+    const t=new Date(r.t).getTime();
+    const before=D.meals.filter(m=>{const mt=new Date(m.t).getTime(); return mt<=t && mt>=t-24*3600e3;});
+    const grps=[...new Set(before.flatMap(m=>m.grp))];
+    const after=D.syms.filter(s=>{const st=new Date(s.t).getTime(); return st>=t && st<=t+(r.min||60)*60e3+6*3600e3;});
+    const worst=Math.max(r.mave,...after.map(s=>s.grad),0);
+    return {r,grps,after,worst};
+  });
+}
+function renderOver(){
+  const rows=analyse();
+  $("#runs").innerHTML=rows.length?`<table><tr><th>Løbetur</th><th>Spist før</th><th>Mave</th></tr>${rows.map(x=>`<tr><td>${day(x.r.t)}<div class="k">${x.r.km?x.r.km+" km · ":""}${x.r.int}</div></td><td>${x.grps.length?x.grps.map(g=>`<span class="tag">${g}</span>`).join(""):"<span class='note'>ingen registreret</span>"}</td><td>${gradeDot(x.worst)}${["rolig","mild","moderat","kraftig"][x.worst]}${x.after.length?`<div class="k">${x.after.map(s=>s.ty.join(", ")).join("; ")}</div>`:""}</td></tr>`).join("")}</table>`:`<div class="empty">Ingen løbeture endnu.</div>`;
+  const stat=GROUPS.map(g=>{ const w=rows.filter(x=>x.grps.includes(g)); const wo=rows.filter(x=>!x.grps.includes(g));
+    const f=a=>a.length?Math.round(100*a.filter(x=>x.worst>=2).length/a.length)+" % ("+a.length+")":"–";
+    return `<tr><td>${g}</td><td>${f(w)}</td><td>${f(wo)}</td></tr>`; }).join("");
+  $("#groups").innerHTML=rows.length?`<table><tr><th>Gruppe</th><th>Problemer når spist</th><th>Problemer når ikke</th></tr>${stat}</table><p class="note">"Problemer" = moderat eller kraftig. Tallet i parentes er antal løbeture.</p>`:`<div class="empty">Kommer når der er løbeture og måltider.</div>`;
+}
+
+/* more */
+$("#exp").onclick=()=>{ const io=$("#io"); io.hidden=false; $("#imp").hidden=false; io.value=JSON.stringify(D); io.select(); try{ navigator.clipboard.writeText(io.value); toast("Kopieret til udklipsholderen"); }catch(e){ toast("Markér teksten og kopiér"); } };
+$("#imp").onclick=()=>{ try{ const j=JSON.parse($("#io").value); if(!j.meals) throw 0; if(confirm("Erstat alle data på telefonen med den indsatte kopi?")){ D=j; save(); toast("Data gendannet"); render(); } }catch(e){ toast("Teksten er ikke en gyldig sikkerhedskopi"); } };
+$("#wipe").onclick=()=>{ if(confirm("Slet alle registreringer permanent?")){ D={meals:[],runs:[],syms:[],tests:[],active:null}; save(); render(); toast("Alt slettet"); } };
+
+/* arkiv */
+let DL=null;
+(async()=>{ try{ if(window.claude&&claude.use) DL=await claude.use("downloads"); }catch(e){ DL=null; } })();
+function arkivNavn(){ return "lobemave-arkiv-"+nowLocal().slice(0,10)+".json"; }
+async function gemArkiv(){
+  const data=JSON.stringify(D,null,1);
+  if(DL){ try{ await DL.save({filename:arkivNavn(),data}); D.lastArchive=new Date().toISOString(); save(); toast("Arkiv gemt"); render(); return; }
+    catch(e){ if(e&&e.code==="declined"){ toast("Arkiv ikke gemt"); return; } if(e&&e.code==="rate_limited"){ toast("Prøv igen om lidt"); return; } } }
+  try{ const f=new File([data],arkivNavn(),{type:"application/json"});
+    if(navigator.canShare&&navigator.canShare({files:[f]})){ await navigator.share({files:[f],title:"Løbemave-arkiv"}); D.lastArchive=new Date().toISOString(); save(); toast("Arkiv delt"); render(); return; } }catch(e){ if(e&&e.name==="AbortError") return; }
+  $("#io").hidden=false; $("#imp").hidden=false; $("#io").value=data; $("#io").select(); toast("Kopiér teksten og gem den som fil");
+}
+$("#arkiv").onclick=gemArkiv; $("#nudge-go").onclick=gemArkiv;
+$("#gendan").onclick=()=>$("#arkivfil").click();
+$("#arkivfil").onchange=e=>{ const f=e.target.files[0]; if(!f) return; const r=new FileReader();
+  r.onload=()=>{ try{ const j=JSON.parse(r.result); if(!j.meals) throw 0;
+    if(confirm(`Erstat alle data på telefonen med arkivet "${f.name}"?`)){ D=j; save(); toast("Arkiv gendannet"); render(); } }catch(x){ toast("Filen er ikke et gyldigt arkiv"); } e.target.value=""; };
+  r.readAsText(f); };
+function renderData(){
+  const la=D.lastArchive?new Date(D.lastArchive):null;
+  $("#datastatus").textContent=la?`Sidste arkiv: ${fmt(D.lastArchive)}.`:"Der er endnu ikke gemt et arkiv.";
+  const n=D.meals.length+D.runs.length+D.syms.length;
+  $("#arkivnudge").hidden=!(n>0 && (!la || Date.now()-la.getTime()>7*864e5));
+}
+
+function render(){ renderRecent(); renderTest(); renderDone(); renderOver(); renderData();
+  $("#sub").textContent=`${D.meals.length} måltider · ${D.runs.length} løbeture · ${D.syms.length} symptomer`; }
+function showView(v){ document.querySelectorAll(".view").forEach(x=>x.classList.toggle("on",x.id==="v-"+v));
+  document.querySelectorAll(".tab").forEach(t=>t.classList.toggle("on",t.dataset.v===v)); window.scrollTo(0,0); }
+$("#intro-go").onclick=()=>{ D.introSeen=true; save(); showView("log"); };
+$("#intro-open").onclick=()=>showView("intro");
+load(); ["m-t","l-t","s-t"].forEach(i=>$("#"+i).value=nowLocal()); render();
+if(!D.introSeen) showView("intro");
+</script>
+</body>
+</html>
