@@ -4,6 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Løbemave – pilot</title>
+<link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxODAgMTgwIj4KICA8ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMxMjhBN0UiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMwQjVBNTIiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz4KICA8cmVjdCB3aWR0aD0iMTgwIiBoZWlnaHQ9IjE4MCIgcng9IjQwIiBmaWxsPSJ1cmwoI2cpIi8+CiAgPGVsbGlwc2UgY3g9IjkwIiBjeT0iMTA0IiByeD0iNTgiIHJ5PSIzNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjRkZGRkZGIiBzdHJva2Utd2lkdGg9IjExIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1kYXNoYXJyYXk9IjI2MiA0MCIgdHJhbnNmb3JtPSJyb3RhdGUoLTggOTAgMTA0KSIvPgogIDxjaXJjbGUgY3g9IjE0Ny40IiBjeT0iOTUuOSIgcj0iMTAiIGZpbGw9IiNGRkZGRkYiLz4KICA8cGF0aCBkPSJNNjggMTE4IEM2OCA5MiA4OCA3NiAxMTQgNzggQzExMiAxMDQgOTYgMTIwIDY4IDExOCBaIiBmaWxsPSIjRENFRkQzIi8+CiAgPHBhdGggZD0iTTc0IDExMyBDODQgMTAyIDk2IDkyIDEwOCA4NCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMEI1QTUyIiBzdHJva2Utd2lkdGg9IjMuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+Cjwvc3ZnPgo=">
+<link rel="apple-touch-icon" href="data:image/png;base64,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">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Løbemave">
+<meta name="theme-color" content="#0E6E64">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
 <style>
 :root{
@@ -113,7 +120,8 @@ nav{position:fixed; left:0; right:0; bottom:0; display:flex; background:var(--pa
   <div class="card" id="f-maaltid">
     <label>Tidspunkt</label><input type="datetime-local" id="m-t">
     <label>Hvad spiste du?</label><textarea id="m-mad" placeholder="fx havregrød med laktosefri mælk og banan"></textarea>
-    <label>FODMAP-grupper i måltidet</label>
+    <div id="m-vurd" class="note" style="margin-top:6px"></div>
+    <label>FODMAP-grupper i måltidet <span class="note">(udfyldes ud fra vurderingen, ret gerne)</span></label>
     <div class="chips" id="m-grp"></div>
     <label>Portion</label>
     <div class="seg" id="m-por"><button data-v="lille">Lille</button><button data-v="mellem" class="on">Mellem</button><button data-v="stor">Stor</button></div>
@@ -188,16 +196,10 @@ nav{position:fixed; left:0; right:0; bottom:0; display:flex; background:var(--pa
     <button class="btn quiet" id="intro-open">Læs introduktionen igen</button>
   </div>
   <div class="card">
-    <h2 style="margin-top:0">FODMAP-grupperne</h2>
-    <table>
-      <tr><td>Fruktaner</td><td>hvede, rug, løg, hvidløg, porre</td></tr>
-      <tr><td>GOS</td><td>bønner, linser, kikærter</td></tr>
-      <tr><td>Laktose</td><td>mælk, yoghurt, blød ost</td></tr>
-      <tr><td>Fruktose</td><td>æble, pære, honning, mango</td></tr>
-      <tr><td>Sorbitol</td><td>blomme, nektarin, fersken, abrikos</td></tr>
-      <tr><td>Mannitol</td><td>champignon, blomkål, sukkerærter</td></tr>
-    </table>
-    <p class="note">Vejledende. Mange fødevarer indeholder flere grupper, og mængden afgør.</p>
+    <h2 style="margin-top:0">Slå en fødevare op</h2>
+    <input id="food-q" placeholder="fx løg, banan, havregryn">
+    <div id="food-r" style="margin-top:8px"></div>
+    <p class="note">Appens egen liste med almindelige danske fødevarer, bygget på offentligt tilgængelig viden om FODMAP-grupper. Den er vejledende, ikke en fødevaredatabase: mange fødevarer indeholder flere grupper, og mængden afgør. Er en fødevare ikke på listen, er den ikke vurderet.</p>
   </div>
 </section>
 </main>
@@ -214,6 +216,205 @@ nav{position:fixed; left:0; right:0; bottom:0; display:flex; background:var(--pa
 const GROUPS=["Fruktaner","GOS","Laktose","Fruktose","Sorbitol","Mannitol"];
 const STYPES=["Oppustethed","Mavesmerter","Trang / diarré","Luft","Kvalme"];
 const KEY="lobemave-v1";
+/* Fødevareliste: n = navn, a = søgeord, g = grupper, l = 0 lav, 1 mængdeafhængig, 2 høj */
+const FOODS=[
+ {n:"Æble",a:["æble","æbler","æblejuice","æblemost"],g:["Fruktose","Sorbitol"],l:2},
+ {n:"Pære",a:["pære","pærer"],g:["Fruktose","Sorbitol"],l:2},
+ {n:"Blomme",a:["blomme","blommer","sveske","svesker"],g:["Sorbitol"],l:2},
+ {n:"Nektarin",a:["nektarin"],g:["Sorbitol","Fruktaner"],l:2},
+ {n:"Fersken",a:["fersken"],g:["Sorbitol","Fruktaner"],l:2},
+ {n:"Abrikos",a:["abrikos"],g:["Sorbitol"],l:2},
+ {n:"Kirsebær",a:["kirsebær"],g:["Fruktose","Sorbitol"],l:2},
+ {n:"Mango",a:["mango"],g:["Fruktose"],l:2},
+ {n:"Vandmelon",a:["vandmelon"],g:["Fruktose","Mannitol","Fruktaner"],l:2},
+ {n:"Honning",a:["honning"],g:["Fruktose"],l:2},
+ {n:"Agavesirup",a:["agave"],g:["Fruktose"],l:2},
+ {n:"Tørret frugt",a:["rosin","rosiner","dadler","dadel","figen","figner","tørret frugt","tranebær tørret"],g:["Fruktose","Fruktaner"],l:2},
+ {n:"Løg",o:1,a:["løg","rødløg","skalotte","forårsløg"],g:["Fruktaner"],l:2},
+ {n:"Hvidløg",o:1,a:["hvidløg"],g:["Fruktaner"],l:2},
+ {n:"Porre",o:1,a:["porre"],g:["Fruktaner"],l:2},
+ {n:"Hvede (brød, pasta, bulgur, couscous)",w:1,a:["hvede","franskbrød","brød","bolle","boller","pasta","spaghetti","pizza","couscous","bulgur","wienerbrød","kage","kiks","tortilla","nudler"],g:["Fruktaner"],l:2},
+ {n:"Rug",w:1,a:["rug","rugbrød"],g:["Fruktaner"],l:2},
+ {n:"Byg",w:1,a:["byg","perlebyg"],g:["Fruktaner"],l:2},
+ {n:"Bønner (kidney, hvide, sorte)",a:["bønner","kidneybønner","hvide bønner","sorte bønner","bagte bønner","baked beans"],g:["GOS","Fruktaner"],l:2},
+ {n:"Kikærter",a:["kikært","hummus","falafel"],g:["GOS"],l:1},
+ {n:"Linser",a:["linse","linser","dal"],g:["GOS"],l:1},
+ {n:"Mælk",d:1,a:["mælk","sødmælk","letmælk","skummetmælk","minimælk","kakaomælk","flødeskum","fløde"],g:["Laktose"],l:2},
+ {n:"Laktosefri mælk",a:["laktosefri"],g:[],l:0},
+ {n:"Yoghurt",d:1,a:["yoghurt","ymer","skyr","a38","tykmælk"],g:["Laktose"],l:2},
+ {n:"Is (fløde-)",d:1,a:["flødeis","is","softice"],g:["Laktose"],l:2},
+ {n:"Blød ost (hytteost, ricotta, flødeost)",d:1,a:["hytteost","ricotta","flødeost","philadelphia","mascarpone","kvark"],g:["Laktose"],l:1},
+ {n:"Hård ost (cheddar, parmesan, gouda)",a:["cheddar","parmesan","gouda","danbo","ost"],g:[],l:0},
+ {n:"Feta / brie / camembert",a:["feta","brie","camembert","mozzarella"],g:[],l:0},
+ {n:"Champignon",a:["champignon","svampe","østershat","portobello"],g:["Mannitol"],l:2},
+ {n:"Blomkål",a:["blomkål"],g:["Mannitol"],l:2},
+ {n:"Sukkerærter",a:["sukkerært"],g:["Mannitol","Fruktaner"],l:2},
+ {n:"Artiskok",a:["artiskok"],g:["Fruktaner","Fruktose"],l:2},
+ {n:"Asparges",a:["asparges"],g:["Fruktose","Fruktaner"],l:2},
+ {n:"Cashewnødder",a:["cashew"],g:["GOS","Fruktaner"],l:2},
+ {n:"Pistacienødder",a:["pistacie"],g:["GOS","Fruktaner"],l:2},
+ {n:"Sødemidler (sorbitol, xylitol, tyggegummi)",a:["sorbitol","xylitol","maltitol","tyggegummi","sukkerfri"],g:["Sorbitol"],l:2},
+ {n:"Inulin / fibertilsætning",a:["inulin","cikorie"],g:["Fruktaner"],l:2},
+ {n:"Avocado",a:["avocado"],g:["Sorbitol"],l:1},
+ {n:"Sød kartoffel",a:["sød kartoffel","søde kartofler","batat"],g:["Mannitol"],l:1},
+ {n:"Majs (kolbe)",a:["majs","majskolbe"],g:["Sorbitol"],l:1},
+ {n:"Bladselleri",a:["bladselleri","selleri"],g:["Mannitol"],l:1},
+ {n:"Mandler",a:["mandel","mandler"],g:["GOS"],l:1},
+ {n:"Hasselnødder",a:["hasselnød"],g:["GOS"],l:1},
+ {n:"Rødbede",a:["rødbede"],g:["Fruktaner"],l:1},
+ {n:"Fennikel",a:["fennikel"],g:["Fruktaner","Mannitol"],l:1},
+ {n:"Granatæble",a:["granatæble"],g:["Fruktaner"],l:1},
+ {n:"Banan (moden)",a:["banan","bananer"],g:["Fruktaner"],l:1},
+ {n:"Havregryn / havregrød",a:["havregryn","havregrød","havre","grød"],g:["Fruktaner","GOS"],l:1},
+ {n:"Havremælk",a:["havremælk","havredrik"],g:["Fruktaner"],l:1},
+ {n:"Ærter",a:["ærter","ært"],g:["GOS"],l:1},
+ {n:"Broccoli",a:["broccoli"],g:["Fruktose"],l:1},
+ {n:"Rosenkål",a:["rosenkål"],g:["Fruktaner"],l:1},
+ {n:"Kål (hvid-, spids-, savoy-)",a:["hvidkål","spidskål","savoykål","kål"],g:["Fruktaner","Sorbitol"],l:1},
+ {n:"Squash",a:["squash","zucchini"],g:["Fruktaner"],l:1},
+ {n:"Græsk yoghurt",d:1,a:["græsk yoghurt"],g:["Laktose"],l:1},
+ {n:"Chokolade (mælke-)",d:1,a:["chokolade","mælkechokolade"],g:["Laktose"],l:1},
+ {n:"Blåbær",a:["blåbær"],g:["Fruktaner"],l:1},
+ {n:"Surdejsbrød af spelt",w:1,a:["spelt","surdej"],g:["Fruktaner"],l:1},
+ {n:"Glutenfrit brød",a:["glutenfri"],g:[],l:0},
+ {n:"Kartoffel",a:["kartoffel","kartofler","pommes"],g:[],l:0},
+ {n:"Ris",a:["ris","risotto","risnudler","riskager","rismælk"],g:[],l:0},
+ {n:"Quinoa",a:["quinoa"],g:[],l:0},
+ {n:"Boghvede",a:["boghvede"],g:[],l:0},
+ {n:"Jordbær",a:["jordbær"],g:[],l:0},
+ {n:"Hindbær",a:["hindbær"],g:[],l:0},
+ {n:"Kiwi",a:["kiwi"],g:[],l:0},
+ {n:"Appelsin / clementin",a:["appelsin","clementin","mandarin"],g:[],l:0},
+ {n:"Citron / lime",a:["citron","lime"],g:[],l:0},
+ {n:"Ananas",a:["ananas"],g:[],l:0},
+ {n:"Druer",a:["drue","druer"],g:[],l:0},
+ {n:"Honningmelon / cantaloupe",a:["honningmelon","cantaloupe"],g:[],l:0},
+ {n:"Gulerod",a:["gulerod","gulerødder"],g:[],l:0},
+ {n:"Agurk",a:["agurk"],g:[],l:0},
+ {n:"Tomat",a:["tomat"],g:[],l:0},
+ {n:"Salat / spinat / rucola",a:["salat","spinat","rucola"],g:[],l:0},
+ {n:"Peberfrugt",a:["peberfrugt","peber"],g:[],l:0},
+ {n:"Aubergine",a:["aubergine"],g:[],l:0},
+ {n:"Grønne bønner",a:["grønne bønner","haricots","bønnespirer"],g:[],l:0},
+ {n:"Æg",a:["æg","omelet"],g:[],l:0},
+ {n:"Kød / fjerkræ / fisk",a:["kød","oksekød","svinekød","kylling","kalkun","laks","torsk","fisk","tun","rejer","skinke","bacon"],g:[],l:0},
+ {n:"Fast tofu / tempeh",a:["tofu","tempeh"],g:[],l:0},
+ {n:"Smør / olie",a:["smør","olie","olivenolie"],g:[],l:0},
+ {n:"Ahornsirup / sukker",a:["ahornsirup","sukker","sirup"],g:[],l:0},
+ {n:"Jordnødder / valnødder / pekan / macadamia",a:["jordnød","peanut","valnød","pekan","macadamia"],g:[],l:0},
+ {n:"Chia / hørfrø / solsikkekerner",a:["chia","hørfrø","solsikke","græskarkerner"],g:[],l:0},
+ {n:"Kaffe / sort og grøn te",a:["kaffe","te","grøn te"],g:[],l:0},
+ {n:"Kamillete / fennikelte",a:["kamille","fennikelte"],g:["Fruktaner"],l:2},
+ {n:"Rødvin / hvidvin / spiritus",a:["vin","rødvin","hvidvin","gin","vodka","whisky"],g:[],l:0},
+
+ /* Danske hverdagsfødevarer og retter */
+ {n:"Rundstykker / boller / flûtes / pitabrød",w:1,a:["rundstykke","rundstykker","flûte","flute","pitabrød","pita","bagel","croissant","tebirkes","birkes","grovbrød","fuldkornsbrød","toastbrød","toast","sandwich","burgerbolle"],g:["Fruktaner"],l:2},
+ {n:"Knækbrød (rug)",w:1,a:["knækbrød","rugfras","rugkiks"],g:["Fruktaner"],l:2},
+ {n:"Müsli / granola / müslibar",w:1,a:["müsli","musli","granola","müslibar","mysli"],g:["Fruktaner","Fruktose"],l:2},
+ {n:"Cornflakes / havrefras",w:1,a:["cornflakes","havrefras","morgenmadsprodukt"],g:["Fruktaner"],l:1},
+ {n:"Kartoffelchips (naturel)",a:["kartoffelchips","chips","franske kartofler"],g:[],l:0},
+ {n:"Chips med løg-/hvidløgssmag (sour cream, paprika)",o:1,a:["sour cream","paprikachips","løgchips"],g:["Fruktaner"],l:1},
+ {n:"Saltstænger / kiks / tuc",w:1,a:["saltstænger","saltstang","tuc","kiks","småkager","mariekiks"],g:["Fruktaner"],l:2},
+ {n:"Popcorn",a:["popcorn"],g:[],l:0},
+ {n:"Nachos / majschips / majstortilla",a:["nachos","majschips","tortillachips","majstortilla"],g:[],l:0},
+ {n:"Pommes frites",a:["pommes","fritter","pomfritter"],g:[],l:0},
+ {n:"Frikadeller (med løg og mel)",o:1,w:1,a:["frikadelle","frikadeller","hakkebøf","farsbrød","kødboller","medister"],g:["Fruktaner"],l:2},
+ {n:"Leverpostej",o:1,w:1,a:["leverpostej","postej"],g:["Fruktaner"],l:1},
+ {n:"Spegepølse / salami / pølser",o:1,a:["spegepølse","salami","pølse","pølser","hotdog","wiener","pepperoni","chorizo"],g:["Fruktaner"],l:1},
+ {n:"Sild (marineret med løg)",o:1,a:["sild","karrysild"],g:["Fruktaner"],l:1},
+ {n:"Makrel i tomat / røget makrel / fiskefilet",a:["makrel","fiskefilet","fiskefrikadelle","fiskefrikadeller","laksefilet","røget laks"],g:[],l:0},
+ {n:"Remoulade / ketchup",o:1,a:["remoulade","ketchup","chilisauce","bbq"],g:["Fruktaner","Fruktose"],l:1},
+ {n:"Mayonnaise / sennep / soja / bearnaise",a:["mayonnaise","mayo","sennep","soja","sojasauce","bearnaise"],g:[],l:0},
+ {n:"Pesto / tzatziki / aioli",d:1,o:1,a:["pesto","tzatziki","aioli"],g:["Fruktaner","Laktose"],l:2},
+ {n:"Brun sovs / flødesovs / bouillon",d:1,o:1,w:1,a:["brun sovs","sovs","flødesovs","bouillon","bouillonterning","fond"],g:["Fruktaner","Laktose"],l:1},
+ {n:"Kartoffelmos (med mælk)",d:1,a:["kartoffelmos","mos"],g:["Laktose"],l:1},
+ {n:"Rødkål",a:["rødkål"],g:["Fruktaner","Sorbitol"],l:1},
+ {n:"Agurkesalat / syltede rødbeder / asier",a:["agurkesalat","asier","syltede"],g:[],l:0},
+ {n:"Flæskesteg / stegt flæsk / bøf",a:["flæskesteg","flæsk","bøf","steak","kotelet","lammekølle","and","kalkunbryst"],g:[],l:0},
+ {n:"Smørrebrød / rugbrødsmad",w:1,a:["smørrebrød","rugbrødsmad","klemme","madpakke"],g:["Fruktaner"],l:2},
+ {n:"Lasagne / bolognese / karryret (løg, hvidløg, hvede)",o:1,w:1,a:["lasagne","bolognese","kødsovs","karry","chili con carne","gryderet","tomatsuppe","suppe"],g:["Fruktaner","GOS"],l:2},
+ {n:"Burger / pizza / pølsebrød",o:1,w:1,a:["burger","pølsebrød","fladbrød","wrap"],g:["Fruktaner"],l:2},
+ {n:"Sushi / ris med fisk",a:["sushi","maki"],g:[],l:0},
+ {n:"Risengrød / risalamande",d:1,a:["risengrød","risalamande","ris à l'amande"],g:["Laktose"],l:2},
+ {n:"Øllebrød",w:1,a:["øllebrød"],g:["Fruktaner"],l:2},
+ {n:"Koldskål / kærnemælk / kefir",d:1,a:["koldskål","kærnemælk","kefir"],g:["Laktose"],l:2},
+ {n:"Kammerjunker / æbleskiver / pandekager / vafler",d:1,w:1,a:["kammerjunker","æbleskiver","pandekage","pandekager","vaffel","vafler","crepes"],g:["Fruktaner","Laktose"],l:2},
+ {n:"Kanelsnegl / flødebolle / lagkage / kager",d:1,w:1,a:["kanelsnegl","flødebolle","flødeboller","lagkage","brunsviger","drømmekage","chokoladekage","muffin","cookie","tærte","tebolle"],g:["Fruktaner","Laktose"],l:2},
+ {n:"Bananbrød / rugbrødskage",w:1,a:["bananbrød"],g:["Fruktaner"],l:2},
+ {n:"Lakrids",w:1,a:["lakrids","lakridser"],g:["Fruktaner"],l:1},
+ {n:"Vingummi / bolsjer (med sukker)",a:["vingummi","bolsje","bolsjer","haribo","slik","karameller"],g:[],l:0},
+ {n:"Marcipan / nougat",a:["marcipan","nougat"],g:["GOS"],l:1},
+ {n:"Mørk chokolade",a:["mørk chokolade"],g:[],l:0},
+ {n:"Cola / sodavand / danskvand",a:["cola","sodavand","danskvand","faxe kondi","fanta","sprite"],g:[],l:0},
+ {n:"Æblejuice / saft / smoothie",a:["saft","saftevand","smoothie","juice"],g:["Fruktose","Sorbitol"],l:1},
+ {n:"Appelsinjuice",a:["appelsinjuice"],g:[],l:0},
+ {n:"Energigel / sportsdrik",a:["energigel","gel","sportsdrik","isotonisk","elektrolyt","maurten","high5"],g:["Fruktose"],l:1},
+ {n:"Druesukker / dextrose",a:["druesukker","dextrose","glukose"],g:[],l:0},
+ {n:"Energibar / proteinbar",w:1,a:["energibar","proteinbar","bar"],g:["Fruktaner","Fruktose"],l:1},
+ {n:"Proteinpulver (valle)",d:1,a:["proteinpulver","whey","valleprotein","proteinshake"],g:["Laktose"],l:1},
+ {n:"Hvedemel / paneret / friturestegt",w:1,a:["hvedemel","paneret","panering","rasp","friturestegt","tempura"],g:["Fruktaner"],l:2},
+ {n:"Tørret kød / pålæg (skinke, roastbeef, kylling)",a:["pålæg","roastbeef","hamburgerryg","kyllingebryst","kalkunpålæg"],g:[],l:0},
+ {n:"Kartoffelsalat (mayo) / pastasalat",o:1,w:1,a:["kartoffelsalat","pastasalat"],g:["Fruktaner"],l:1},
+ {n:"Æggekage / røræg / spejlæg",a:["æggekage","røræg","spejlæg","omelet"],g:[],l:0},
+ {n:"Nudler (ris-) / rispapir",a:["risnudler","rispapir","glasnudler"],g:[],l:0},
+ {n:"Kvinoa / hirse / polenta",a:["hirse","polenta","majsgrød"],g:[],l:0},
+ {n:"Øl (i mængder)",w:1,a:["øl","pilsner","fadøl"],g:["Fruktaner"],l:1},
+];
+const LVL=["lav","mængdeafhængig","høj"];
+function norm(s){ return " "+s.toLowerCase().replace(/[.,;:()\n]/g," ").replace(/\s+/g," ")+" "; }
+const NEG={ laktose:"d", mælk:"d", mælkefri:"d", laktosefri:"d", gluten:"w", hvede:"w", mel:"w", hvedemel:"w", glutenfri:"w", hvedefri:"w", løg:"o", hvidløg:"o", løgfri:"o", fruktaner:"Fruktaner", gos:"GOS", fruktose:"Fruktose", sorbitol:"Sorbitol", mannitol:"Mannitol" };
+const NEGLABEL={d:"uden laktose",w:"uden hvede/gluten",o:"uden løg"};
+function findNeg(text){
+  const t=text.toLowerCase(); const out=new Set();
+  /* "uden X", "uden X og Y", "uden X, Y" */
+  for(const m of t.matchAll(/\buden\s+([^.;\n]+)/g)){ m[1].split(/\s*(?:,|\bog\b|\beller\b)\s*/).forEach(w=>{ w=w.trim().split(" ")[0]; if(NEG[w]) out.add(NEG[w]); }); }
+  /* "laktosefri", "gluten-fri", "glutenfrit" */
+  for(const m of t.matchAll(/\b([a-zæøå]+)-?fri[t]?\b/g)){ const k=m[1]+"fri"; if(NEG[k]) out.add(NEG[k]); }
+  return [...out];
+}
+function assess(text){
+  const t=norm(text); const hits=[]; const neg=findNeg(text);
+  FOODS.forEach(f=>{ if(f.a.some(a=>a.length>=4?t.includes(" "+a):t.includes(" "+a+" "))) hits.push(Object.assign({},f)); });
+  if(hits.some(f=>f.n==="Grønne bønner")){ const i=hits.findIndex(f=>f.n.startsWith("Bønner")); if(i>=0) hits.splice(i,1); }
+  if(neg.includes("d")){ const i=hits.findIndex(f=>f.n==="Mælk"); if(i>=0&&hits.some(f=>f.n==="Laktosefri mælk")) hits.splice(i,1); }
+  if(neg.includes("w")){ const i=hits.findIndex(f=>f.n.startsWith("Hvede")); if(i>=0&&hits.some(f=>f.n==="Glutenfrit brød")) hits.splice(i,1); }
+  hits.forEach(f=>{ f.eg=f.g.slice(); f.adj=[];
+    const drop=(grp,key)=>{ if(f.eg.includes(grp)){ f.eg=f.eg.filter(x=>x!==grp); f.adj.push(NEGLABEL[key]||("uden "+grp.toLowerCase())); } };
+    if(neg.includes("d")&&f.d) drop("Laktose","d");
+    if(f.eg.includes("Fruktaner")&&(f.w||f.o)){
+      const wNeg=f.w&&neg.includes("w"), oNeg=f.o&&neg.includes("o");
+      const remains=(f.w&&!wNeg)||(f.o&&!oNeg);
+      if(wNeg) f.adj.push(NEGLABEL.w); if(oNeg) f.adj.push(NEGLABEL.o);
+      if((wNeg||oNeg)&&!remains) f.eg=f.eg.filter(x=>x!=="Fruktaner");
+    }
+    neg.filter(n=>GROUPS.includes(n)).forEach(g=>drop(g,g));
+    f.el=f.eg.length?f.l:(f.l===0?0:0);
+    /* niveau falder til lav hvis alle grupper er fjernet; ellers uændret */
+    if(f.eg.length && f.eg.length<f.g.length && f.l===2) f.el=1;
+  });
+  const lvl=hits.length?Math.max(...hits.map(f=>f.el)):null;
+  const groups=[...new Set(hits.flatMap(f=>f.eg))];
+  const adj=[...new Set(hits.flatMap(f=>f.adj))];
+  return {hits,lvl,groups,adj};
+}
+function lvlDot(l){ return `<span class="grade" style="background:var(--g${l===2?3:l===1?1:0})"></span>`; }
+let touched=false;
+function renderVurd(){
+  const txt=$("#m-mad").value; const box=$("#m-vurd");
+  if(!txt.trim()){ box.innerHTML=""; return; }
+  const v=assess(txt);
+  if(!v.hits.length){ box.innerHTML="Ingen fødevarer fra listen genkendt. Markér grupperne selv, hvis du kender dem."; return; }
+  const por=segVal("m-por");
+  const hi=v.hits.filter(f=>f.el===2), mid=v.hits.filter(f=>f.el===1);
+  let verdict;
+  if(v.lvl===2) verdict="Høj FODMAP: "+hi.map(f=>f.n).join(", ");
+  else if(v.lvl===1) verdict=(por==="stor"?"Stor portion af mængdeafhængige fødevarer: ":"Mængdeafhængig: ")+mid.map(f=>f.n).join(", ");
+  else verdict="Lav FODMAP ud fra det genkendte";
+  box.innerHTML=`<div>${lvlDot(v.lvl)}<strong>${verdict}</strong></div>
+    ${v.adj.length?`<div>Tilpasset: ${v.adj.join(", ")}</div>`:""}
+    <div style="margin-top:4px">${v.hits.map(f=>`<span class="tag">${f.n}${f.eg.length?" · "+f.eg.join("/"):""}${f.adj.length?` <s>${f.g.filter(g=>!f.eg.includes(g)).join("/")}</s>`:""}</span>`).join("")}</div>`;
+  if(!touched){ chipsClear("m-grp"); document.querySelectorAll("#m-grp .chip").forEach(b=>{ if(v.groups.includes(b.textContent)) b.classList.add("on"); }); }
+}
 let D={meals:[],runs:[],syms:[],tests:[],active:null};
 
 function load(){ try{ const r=localStorage.getItem(KEY); if(r) D=Object.assign(D,JSON.parse(r)); }catch(e){} }
@@ -225,7 +426,7 @@ function day(iso){ return new Date(iso).toLocaleDateString("da-DK",{weekday:"sho
 const $=s=>document.querySelector(s);
 
 /* chips & segs */
-function chips(id,list){ const c=$("#"+id); c.innerHTML=""; list.forEach(g=>{ const b=document.createElement("button"); b.className="chip"; b.type="button"; b.textContent=g; b.onclick=()=>b.classList.toggle("on"); c.appendChild(b); }); }
+function chips(id,list){ const c=$("#"+id); c.innerHTML=""; list.forEach(g=>{ const b=document.createElement("button"); b.className="chip"; b.type="button"; b.textContent=g; b.onclick=()=>{ b.classList.toggle("on"); if(id==="m-grp") touched=true; }; c.appendChild(b); }); }
 function chipsOn(id){ return [...document.querySelectorAll("#"+id+" .chip.on")].map(b=>b.textContent); }
 function chipsClear(id){ document.querySelectorAll("#"+id+" .chip").forEach(b=>b.classList.remove("on")); }
 document.querySelectorAll(".seg").forEach(s=>s.addEventListener("click",e=>{ const b=e.target.closest("button"); if(!b) return; s.querySelectorAll("button").forEach(x=>x.classList.remove("on")); b.classList.add("on"); }));
@@ -242,9 +443,13 @@ document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>{ document.querySelec
   document.querySelectorAll(".view").forEach(v=>v.classList.toggle("on",v.id==="v-"+t.dataset.v)); render(); });
 
 /* save handlers */
+$("#m-mad").addEventListener("input",renderVurd); $("#m-por").addEventListener("click",()=>setTimeout(renderVurd,0));
+$("#food-q").addEventListener("input",()=>{ const q=$("#food-q").value.trim().toLowerCase(); const r=$("#food-r"); if(q.length<2){ r.innerHTML=""; return; }
+  const hits=FOODS.filter(f=>f.n.toLowerCase().includes(q)||f.a.some(a=>a.includes(q))).slice(0,8);
+  r.innerHTML=hits.length?hits.map(f=>`<div class="entry"><div class="t">${lvlDot(f.l)}${LVL[f.l]}</div><div>${f.n}<div class="k">${f.g.length?f.g.join(", "):"ingen FODMAP-gruppe"}</div></div><div></div></div>`).join(""):"<div class=\"empty\">Ikke på listen.</div>"; });
 $("#m-save").onclick=()=>{ const mad=$("#m-mad").value.trim(); if(!mad){toast("Skriv hvad du spiste"); return;}
-  D.meals.push({id:Date.now(),t:$("#m-t").value||nowLocal(),mad,grp:chipsOn("m-grp"),por:segVal("m-por")}); save();
-  $("#m-mad").value=""; chipsClear("m-grp"); $("#m-t").value=nowLocal(); toast("Måltid gemt"); render(); };
+  D.meals.push({id:Date.now(),t:$("#m-t").value||nowLocal(),mad,grp:chipsOn("m-grp"),por:segVal("m-por"),lvl:assess(mad).lvl,adj:assess(mad).adj,src:touched?"bekræftet":"auto"}); save();
+  $("#m-mad").value=""; chipsClear("m-grp"); $("#m-vurd").innerHTML=""; touched=false; $("#m-t").value=nowLocal(); toast("Måltid gemt"); render(); };
 $("#l-save").onclick=()=>{ D.runs.push({id:Date.now(),t:$("#l-t").value||nowLocal(),min:+$("#l-min").value||null,km:+$("#l-km").value||null,int:segVal("l-int"),mave:+segVal("l-mave")}); save();
   $("#l-min").value=""; $("#l-km").value=""; $("#l-t").value=nowLocal(); toast("Løbetur gemt"); render(); };
 $("#s-save").onclick=()=>{ const ty=chipsOn("s-type"); if(!ty.length){toast("Vælg mindst én type"); return;}
@@ -256,7 +461,7 @@ function gradeDot(g){ return `<span class="grade" style="background:var(--g${g})
 
 /* recent */
 function renderRecent(){
-  const all=[...D.meals.map(m=>({k:"meals",t:m.t,id:m.id,h:`${m.mad}<div class="k">${m.grp.length?m.grp.map(g=>`<span class="tag">${g}</span>`).join(""):"<span class='tag'>Ingen FODMAP-gruppe</span>"} · ${m.por}</div>`})),
+  const all=[...D.meals.map(m=>({k:"meals",t:m.t,id:m.id,h:`${m.lvl!=null?lvlDot(m.lvl):""}${m.mad}<div class="k">${m.grp.length?m.grp.map(g=>`<span class="tag">${g}</span>`).join(""):"<span class='tag'>Ingen FODMAP-gruppe</span>"} · ${m.por}${m.adj&&m.adj.length?" · "+m.adj.join(", "):""}${m.src?` · <em>${m.src}</em>`:""}</div>`})),
     ...D.runs.map(r=>({k:"runs",t:r.t,id:r.id,h:`${gradeDot(r.mave)}Løbetur ${r.km?r.km+" km":""} ${r.min?r.min+" min":""}<div class="k">${r.int} · mave: ${["rolig","lidt uro","generende","måtte stoppe"][r.mave]}</div>`})),
     ...D.syms.map(s=>({k:"syms",t:s.t,id:s.id,h:`${gradeDot(s.grad)}${s.ty.join(", ")}<div class="k">${["","mild","moderat","kraftig"][s.grad]} · ${s.ctx==="ingen"?"uden løb":s.ctx+" løb"}${s.note?" · "+s.note:""}</div>`}))]
     .sort((a,b)=>b.t.localeCompare(a.t)).slice(0,12);
