@@ -70,7 +70,7 @@ th{color:var(--muted); font-weight:400; border-top:0}
 .toast{position:fixed; left:50%; transform:translateX(-50%); bottom:calc(84px + env(safe-area-inset-bottom,0px)); background:var(--ink); color:var(--bg); padding:10px 16px; border-radius:999px; font-size:15px; opacity:0; transition:opacity .2s; pointer-events:none}
 .toast.on{opacity:1}
 nav{position:fixed; left:0; right:0; bottom:0; display:flex; background:var(--panel); border-top:1px solid var(--line); padding:6px 0 calc(6px + env(safe-area-inset-bottom,0px))}
-.tab{flex:1; border:0; background:none; color:var(--muted); font:inherit; font-size:13px; padding:6px 2px; cursor:pointer}
+.tab{flex:1; border:0; background:none; color:var(--muted); font:inherit; font-size:12px; padding:6px 0; cursor:pointer}
 .tab.on{color:var(--accent); font-weight:700}
 .tab span{display:block; font-size:20px}
 .note{font-size:14px; color:var(--muted)}
@@ -122,6 +122,7 @@ nav{position:fixed; left:0; right:0; bottom:0; display:flex; background:var(--pa
     <label>Tidspunkt</label><input type="datetime-local" id="m-t">
     <label>Hvad spiste du?</label><textarea id="m-mad" placeholder="fx havregrød med laktosefri mælk og banan"></textarea>
     <div id="m-vurd" class="note" style="margin-top:6px"></div>
+    <p class="note" style="margin:6px 0 0">Usikker på en fødevare? <button class="chip" type="button" id="to-mad">Slå den op</button></p>
     <label>FODMAP-grupper i måltidet <span class="note">(udfyldes ud fra vurderingen, ret gerne)</span></label>
     <div class="chips" id="m-grp"></div>
     <label>Portion</label>
@@ -176,6 +177,17 @@ nav{position:fixed; left:0; right:0; bottom:0; display:flex; background:var(--pa
   <div class="card wrap" id="groups"></div>
 </section>
 
+<!-- MAD -->
+<section class="view" id="v-mad">
+  <div class="card">
+    <h2 style="margin-top:0">Slå en fødevare op</h2>
+    <p class="note">Lav, mængdeafhængig eller høj FODMAP, og hvor meget kan du spise?</p>
+    <input id="food-q" type="search" placeholder="fx løg, banan, havregryn">
+    <div id="food-r" style="margin-top:8px"></div>
+    <p class="note">Appens egen liste med almindelige danske fødevarer, bygget på offentligt tilgængelig viden om FODMAP-grupper. Den er vejledende, ikke en fødevaredatabase: mange fødevarer indeholder flere grupper, og mængden afgør. De angivne mængdegrænser er afrundede skøn ud fra almindeligt kendte værdier; brug Monash-appen, hvis du vil have de præcise tal. Er en fødevare ikke på listen, er den ikke vurderet.</p>
+  </div>
+</section>
+
 <!-- MERE -->
 <section class="view" id="v-more">
   <div class="card">
@@ -196,12 +208,6 @@ nav{position:fixed; left:0; right:0; bottom:0; display:flex; background:var(--pa
     <p class="note">Hvorfor dagbogen findes, og hvordan den bruges.</p>
     <button class="btn quiet" id="intro-open">Læs introduktionen igen</button>
   </div>
-  <div class="card">
-    <h2 style="margin-top:0">Slå en fødevare op</h2>
-    <input id="food-q" placeholder="fx løg, banan, havregryn">
-    <div id="food-r" style="margin-top:8px"></div>
-    <p class="note">Appens egen liste med almindelige danske fødevarer, bygget på offentligt tilgængelig viden om FODMAP-grupper. Den er vejledende, ikke en fødevaredatabase: mange fødevarer indeholder flere grupper, og mængden afgør. De angivne mængdegrænser er afrundede skøn ud fra almindeligt kendte værdier; brug Monash-appen, hvis du vil have de præcise tal. Er en fødevare ikke på listen, er den ikke vurderet.</p>
-  </div>
 </section>
 </main>
 
@@ -209,6 +215,7 @@ nav{position:fixed; left:0; right:0; bottom:0; display:flex; background:var(--pa
   <button class="tab on" data-v="log"><span>✎</span>I dag</button>
   <button class="tab" data-v="test"><span>◔</span>Test</button>
   <button class="tab" data-v="over"><span>≡</span>Overblik</button>
+  <button class="tab" data-v="mad"><span>⌕</span>Mad</button>
   <button class="tab" data-v="more"><span>…</span>Mere</button>
 </nav>
 <div class="toast" id="toast"></div>
@@ -591,6 +598,7 @@ function showView(v){ document.querySelectorAll(".view").forEach(x=>x.classList.
   document.querySelectorAll(".tab").forEach(t=>t.classList.toggle("on",t.dataset.v===v)); window.scrollTo(0,0); }
 $("#intro-go").onclick=()=>{ D.introSeen=true; save(); showView("log"); };
 $("#intro-open").onclick=()=>showView("intro");
+$("#to-mad").onclick=()=>{ showView("mad"); setTimeout(()=>$("#food-q").focus(),50); };
 load(); ["m-t","l-t","s-t"].forEach(i=>$("#"+i).value=nowLocal()); render();
 if(!D.introSeen) showView("intro");
 </script>
