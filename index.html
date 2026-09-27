@@ -70,7 +70,7 @@ th{color:var(--muted); font-weight:400; border-top:0}
 .toast{position:fixed; left:50%; transform:translateX(-50%); bottom:calc(84px + env(safe-area-inset-bottom,0px)); background:var(--ink); color:var(--bg); padding:10px 16px; border-radius:999px; font-size:15px; opacity:0; transition:opacity .2s; pointer-events:none}
 .toast.on{opacity:1}
 nav{position:fixed; left:0; right:0; bottom:0; display:flex; background:var(--panel); border-top:1px solid var(--line); padding:6px 0 calc(6px + env(safe-area-inset-bottom,0px))}
-.tab{flex:1; border:0; background:none; color:var(--muted); font:inherit; font-size:13px; padding:6px 2px; cursor:pointer}
+.tab{flex:1; border:0; background:none; color:var(--muted); font:inherit; font-size:12px; padding:6px 0; cursor:pointer}
 .tab.on{color:var(--accent); font-weight:700}
 .tab span{display:block; font-size:20px}
 .note{font-size:14px; color:var(--muted)}
@@ -99,6 +99,7 @@ nav{position:fixed; left:0; right:0; bottom:0; display:flex; background:var(--pa
     <p><strong>Når maven driller.</strong> Registrér symptomet med det samme, også uden løb. Det er lige så vigtigt at vide, hvornår der <em>ikke</em> er symptomer.</p>
     <p><strong>Når du vil teste en gruppe.</strong> Under <em>Test</em> starter du en genintroduktion: én gruppe, tre dage med stigende mængde, og en løbetur inden for et døgn efter mindst én af dagene. Hold tre dages pause før næste gruppe. Resultatet gemmes, så du med tiden får din egen tolerance-liste.</p>
     <p><strong>Læs mønstrene.</strong> <em>Overblik</em> viser, hvad du spiste inden hver løbetur, og hvordan den gik. Tallene er et mønster, ikke et bevis. Først efter en del løbeture bliver de til at stole på.</p>
+    <p><strong>Mængden tæller.</strong> Mange fødevarer er lave i små mængder og høje i store. Skriv mængden, når du kan ("⅓ banan", "1 dl havregryn", "10 mandler"), så vurderer appen ud fra den. Flere mængdeafhængige fødevarer i samme måltid lægger sig sammen.</p>
     <p class="note">Tre ting, der gør data brugbare: registrér før, ikke efter. Registrér også de gode dage. Skift kun én ting ad gangen.</p>
   </div>
   <div class="card">
@@ -121,6 +122,7 @@ nav{position:fixed; left:0; right:0; bottom:0; display:flex; background:var(--pa
     <label>Tidspunkt</label><input type="datetime-local" id="m-t">
     <label>Hvad spiste du?</label><textarea id="m-mad" placeholder="fx havregrød med laktosefri mælk og banan"></textarea>
     <div id="m-vurd" class="note" style="margin-top:6px"></div>
+    <p class="note" style="margin:6px 0 0">Usikker på en fødevare? <button class="chip" type="button" id="to-mad">Slå den op</button></p>
     <label>FODMAP-grupper i måltidet <span class="note">(udfyldes ud fra vurderingen, ret gerne)</span></label>
     <div class="chips" id="m-grp"></div>
     <label>Portion</label>
@@ -175,6 +177,17 @@ nav{position:fixed; left:0; right:0; bottom:0; display:flex; background:var(--pa
   <div class="card wrap" id="groups"></div>
 </section>
 
+<!-- MAD -->
+<section class="view" id="v-mad">
+  <div class="card">
+    <h2 style="margin-top:0">Slå en fødevare op</h2>
+    <p class="note">Lav, mængdeafhængig eller høj FODMAP, og hvor meget kan du spise?</p>
+    <input id="food-q" type="search" placeholder="fx løg, banan, havregryn">
+    <div id="food-r" style="margin-top:8px"></div>
+    <p class="note">Appens egen liste med almindelige danske fødevarer, bygget på offentligt tilgængelig viden om FODMAP-grupper. Den er vejledende, ikke en fødevaredatabase: mange fødevarer indeholder flere grupper, og mængden afgør. De angivne mængdegrænser er afrundede skøn ud fra almindeligt kendte værdier; brug Monash-appen, hvis du vil have de præcise tal. Er en fødevare ikke på listen, er den ikke vurderet.</p>
+  </div>
+</section>
+
 <!-- MERE -->
 <section class="view" id="v-more">
   <div class="card">
@@ -195,12 +208,6 @@ nav{position:fixed; left:0; right:0; bottom:0; display:flex; background:var(--pa
     <p class="note">Hvorfor dagbogen findes, og hvordan den bruges.</p>
     <button class="btn quiet" id="intro-open">Læs introduktionen igen</button>
   </div>
-  <div class="card">
-    <h2 style="margin-top:0">Slå en fødevare op</h2>
-    <input id="food-q" placeholder="fx løg, banan, havregryn">
-    <div id="food-r" style="margin-top:8px"></div>
-    <p class="note">Appens egen liste med almindelige danske fødevarer, bygget på offentligt tilgængelig viden om FODMAP-grupper. Den er vejledende, ikke en fødevaredatabase: mange fødevarer indeholder flere grupper, og mængden afgør. Er en fødevare ikke på listen, er den ikke vurderet.</p>
-  </div>
 </section>
 </main>
 
@@ -208,6 +215,7 @@ nav{position:fixed; left:0; right:0; bottom:0; display:flex; background:var(--pa
   <button class="tab on" data-v="log"><span>✎</span>I dag</button>
   <button class="tab" data-v="test"><span>◔</span>Test</button>
   <button class="tab" data-v="over"><span>≡</span>Overblik</button>
+  <button class="tab" data-v="mad"><span>⌕</span>Mad</button>
   <button class="tab" data-v="more"><span>…</span>Mere</button>
 </nav>
 <div class="toast" id="toast"></div>
@@ -237,13 +245,13 @@ const FOODS=[
  {n:"Rug",w:1,a:["rug","rugbrød"],g:["Fruktaner"],l:2},
  {n:"Byg",w:1,a:["byg","perlebyg"],g:["Fruktaner"],l:2},
  {n:"Bønner (kidney, hvide, sorte)",a:["bønner","kidneybønner","hvide bønner","sorte bønner","bagte bønner","baked beans"],g:["GOS","Fruktaner"],l:2},
- {n:"Kikærter",a:["kikært","hummus","falafel"],g:["GOS"],l:1},
- {n:"Linser",a:["linse","linser","dal"],g:["GOS"],l:1},
+ {n:"Kikærter",lim:"½ dl (ca. 40 g, fra dåse) er lav, 1 dl er høj",thr:{u:"dl",v:0.5},a:["kikært","hummus","falafel"],g:["GOS"],l:1},
+ {n:"Linser",lim:"½ dl (ca. 45 g, fra dåse) er lav, 1 dl er høj",thr:{u:"dl",v:0.5},a:["linse","linser","dal"],g:["GOS"],l:1},
  {n:"Mælk",d:1,a:["mælk","sødmælk","letmælk","skummetmælk","minimælk","kakaomælk","flødeskum","fløde"],g:["Laktose"],l:2},
  {n:"Laktosefri mælk",a:["laktosefri"],g:[],l:0},
  {n:"Yoghurt",d:1,a:["yoghurt","ymer","skyr","a38","tykmælk"],g:["Laktose"],l:2},
  {n:"Is (fløde-)",d:1,a:["flødeis","is","softice"],g:["Laktose"],l:2},
- {n:"Blød ost (hytteost, ricotta, flødeost)",d:1,a:["hytteost","ricotta","flødeost","philadelphia","mascarpone","kvark"],g:["Laktose"],l:1},
+ {n:"Blød ost (hytteost, ricotta, flødeost)",lim:"2 spsk er lav, ½ dl eller mere er høj",thr:{u:"dl",v:0.3},d:1,a:["hytteost","ricotta","flødeost","philadelphia","mascarpone","kvark"],g:["Laktose"],l:1},
  {n:"Hård ost (cheddar, parmesan, gouda)",a:["cheddar","parmesan","gouda","danbo","ost"],g:[],l:0},
  {n:"Feta / brie / camembert",a:["feta","brie","camembert","mozzarella"],g:[],l:0},
  {n:"Champignon",a:["champignon","svampe","østershat","portobello"],g:["Mannitol"],l:2},
@@ -255,27 +263,27 @@ const FOODS=[
  {n:"Pistacienødder",a:["pistacie"],g:["GOS","Fruktaner"],l:2},
  {n:"Sødemidler (sorbitol, xylitol, tyggegummi)",a:["sorbitol","xylitol","maltitol","tyggegummi","sukkerfri"],g:["Sorbitol"],l:2},
  {n:"Inulin / fibertilsætning",a:["inulin","cikorie"],g:["Fruktaner"],l:2},
- {n:"Avocado",a:["avocado"],g:["Sorbitol"],l:1},
- {n:"Sød kartoffel",a:["sød kartoffel","søde kartofler","batat"],g:["Mannitol"],l:1},
- {n:"Majs (kolbe)",a:["majs","majskolbe"],g:["Sorbitol"],l:1},
- {n:"Bladselleri",a:["bladselleri","selleri"],g:["Mannitol"],l:1},
- {n:"Mandler",a:["mandel","mandler"],g:["GOS"],l:1},
- {n:"Hasselnødder",a:["hasselnød"],g:["GOS"],l:1},
- {n:"Rødbede",a:["rødbede"],g:["Fruktaner"],l:1},
- {n:"Fennikel",a:["fennikel"],g:["Fruktaner","Mannitol"],l:1},
- {n:"Granatæble",a:["granatæble"],g:["Fruktaner"],l:1},
- {n:"Banan (moden)",a:["banan","bananer"],g:["Fruktaner"],l:1},
- {n:"Havregryn / havregrød",a:["havregryn","havregrød","havre","grød"],g:["Fruktaner","GOS"],l:1},
- {n:"Havremælk",a:["havremælk","havredrik"],g:["Fruktaner"],l:1},
- {n:"Ærter",a:["ærter","ært"],g:["GOS"],l:1},
- {n:"Broccoli",a:["broccoli"],g:["Fruktose"],l:1},
- {n:"Rosenkål",a:["rosenkål"],g:["Fruktaner"],l:1},
- {n:"Kål (hvid-, spids-, savoy-)",a:["hvidkål","spidskål","savoykål","kål"],g:["Fruktaner","Sorbitol"],l:1},
- {n:"Squash",a:["squash","zucchini"],g:["Fruktaner"],l:1},
- {n:"Græsk yoghurt",d:1,a:["græsk yoghurt"],g:["Laktose"],l:1},
- {n:"Chokolade (mælke-)",d:1,a:["chokolade","mælkechokolade"],g:["Laktose"],l:1},
- {n:"Blåbær",a:["blåbær"],g:["Fruktaner"],l:1},
- {n:"Surdejsbrød af spelt",w:1,a:["spelt","surdej"],g:["Fruktaner"],l:1},
+ {n:"Avocado",lim:"⅛ avocado (ca. 30 g) er lav, ¼ eller mere er høj",thr:{u:"stk",v:0.15},a:["avocado"],g:["Sorbitol"],l:1},
+ {n:"Sød kartoffel",lim:"75 g er lav, 100 g eller mere er høj",thr:{u:"g",v:75},a:["sød kartoffel","søde kartofler","batat"],g:["Mannitol"],l:1},
+ {n:"Majs (kolbe)",lim:"½ kolbe er lav, en hel er høj",thr:{u:"stk",v:0.5},a:["majs","majskolbe"],g:["Sorbitol"],l:1},
+ {n:"Bladselleri",lim:"¼ stang (ca. 10 cm) er lav, ½ stang er høj",thr:{u:"stk",v:0.25},a:["bladselleri","selleri"],g:["Mannitol"],l:1},
+ {n:"Mandler",lim:"10 stk er lav, 20 er høj",thr:{u:"stk",v:10},a:["mandel","mandler"],g:["GOS"],l:1},
+ {n:"Hasselnødder",lim:"10 stk er lav, 30 er høj",thr:{u:"stk",v:10},a:["hasselnød"],g:["GOS"],l:1},
+ {n:"Rødbede",lim:"2 skiver (20 g) er lav, 4 skiver er høj",thr:{u:"g",v:20},a:["rødbede"],g:["Fruktaner"],l:1},
+ {n:"Fennikel",lim:"1 dl er lav, 1½ dl er høj",thr:{u:"dl",v:1},a:["fennikel"],g:["Fruktaner","Mannitol"],l:1},
+ {n:"Granatæble",lim:"¼ lille (ca. 40 g) er lav, ½ er høj",thr:{u:"stk",v:0.25},a:["granatæble"],g:["Fruktaner"],l:1},
+ {n:"Banan (moden)",lim:"⅓ banan er lav, en hel er høj",thr:{u:"stk",v:0.34},a:["banan","bananer"],g:["Fruktaner"],l:1},
+ {n:"Havregryn / havregrød",lim:"1 dl (ca. 50 g) er lav, 2 dl er høj",thr:{u:"dl",v:1},a:["havregryn","havregrød","havre","grød"],g:["Fruktaner","GOS"],l:1},
+ {n:"Havremælk",lim:"½ dl er lav, 1 dl eller mere er høj",thr:{u:"dl",v:0.5},a:["havremælk","havredrik"],g:["Fruktaner"],l:1},
+ {n:"Ærter",lim:"1 spsk er lav, ½ dl er høj",thr:{u:"dl",v:0.2},a:["ærter","ært"],g:["GOS"],l:1},
+ {n:"Broccoli",lim:"1½ dl buketter er lav, 2 dl stilk er høj",thr:{u:"dl",v:1.5},a:["broccoli"],g:["Fruktose"],l:1},
+ {n:"Rosenkål",lim:"2 stk er lav, 6 er høj",thr:{u:"stk",v:2},a:["rosenkål"],g:["Fruktaner"],l:1},
+ {n:"Kål (hvid-, spids-, savoy-)",lim:"1 dl hvidkål er lav, 2 dl er høj (savoykål: ½ dl)",thr:{u:"dl",v:1},a:["hvidkål","spidskål","savoykål","kål"],g:["Fruktaner","Sorbitol"],l:1},
+ {n:"Squash",lim:"65 g (ca. ⅓ squash) er lav, 100 g er høj",thr:{u:"g",v:65},a:["squash","zucchini"],g:["Fruktaner"],l:1},
+ {n:"Græsk yoghurt",lim:"1 spsk (ca. 25 g) er lav, ½ dl er høj",thr:{u:"dl",v:0.25},d:1,a:["græsk yoghurt"],g:["Laktose"],l:1},
+ {n:"Chokolade (mælke-)",lim:"20 g (5 stykker) er lav, 30 g er høj",thr:{u:"g",v:20},d:1,a:["chokolade","mælkechokolade"],g:["Laktose"],l:1},
+ {n:"Blåbær",lim:"40 g (en lille håndfuld) er lav, 1 dl er høj",thr:{u:"g",v:40},a:["blåbær"],g:["Fruktaner"],l:1},
+ {n:"Surdejsbrød af spelt",lim:"2 skiver er lav, 3 eller flere er høj",thr:{u:"stk",v:2},w:1,a:["spelt","surdej"],g:["Fruktaner"],l:1},
  {n:"Glutenfrit brød",a:["glutenfri"],g:[],l:0},
  {n:"Kartoffel",a:["kartoffel","kartofler","pommes"],g:[],l:0},
  {n:"Ris",a:["ris","risotto","risnudler","riskager","rismælk"],g:[],l:0},
@@ -311,24 +319,24 @@ const FOODS=[
  {n:"Rundstykker / boller / flûtes / pitabrød",w:1,a:["rundstykke","rundstykker","flûte","flute","pitabrød","pita","bagel","croissant","tebirkes","birkes","grovbrød","fuldkornsbrød","toastbrød","toast","sandwich","burgerbolle"],g:["Fruktaner"],l:2},
  {n:"Knækbrød (rug)",w:1,a:["knækbrød","rugfras","rugkiks"],g:["Fruktaner"],l:2},
  {n:"Müsli / granola / müslibar",w:1,a:["müsli","musli","granola","müslibar","mysli"],g:["Fruktaner","Fruktose"],l:2},
- {n:"Cornflakes / havrefras",w:1,a:["cornflakes","havrefras","morgenmadsprodukt"],g:["Fruktaner"],l:1},
+ {n:"Cornflakes / havrefras",lim:"2 dl er lav, mere kan give problemer",thr:{u:"dl",v:2},w:1,a:["cornflakes","havrefras","morgenmadsprodukt"],g:["Fruktaner"],l:1},
  {n:"Kartoffelchips (naturel)",a:["kartoffelchips","chips","franske kartofler"],g:[],l:0},
- {n:"Chips med løg-/hvidløgssmag (sour cream, paprika)",o:1,a:["sour cream","paprikachips","løgchips"],g:["Fruktaner"],l:1},
+ {n:"Chips med løg-/hvidløgssmag (sour cream, paprika)",lim:"en lille skål er lav; mængden af løgpulver stiger med posen",thr:{u:"g",v:30},o:1,a:["sour cream","paprikachips","løgchips"],g:["Fruktaner"],l:1},
  {n:"Saltstænger / kiks / tuc",w:1,a:["saltstænger","saltstang","tuc","kiks","småkager","mariekiks"],g:["Fruktaner"],l:2},
  {n:"Popcorn",a:["popcorn"],g:[],l:0},
  {n:"Nachos / majschips / majstortilla",a:["nachos","majschips","tortillachips","majstortilla"],g:[],l:0},
  {n:"Pommes frites",a:["pommes","fritter","pomfritter"],g:[],l:0},
  {n:"Frikadeller (med løg og mel)",o:1,w:1,a:["frikadelle","frikadeller","hakkebøf","farsbrød","kødboller","medister"],g:["Fruktaner"],l:2},
- {n:"Leverpostej",o:1,w:1,a:["leverpostej","postej"],g:["Fruktaner"],l:1},
- {n:"Spegepølse / salami / pølser",o:1,a:["spegepølse","salami","pølse","pølser","hotdog","wiener","pepperoni","chorizo"],g:["Fruktaner"],l:1},
- {n:"Sild (marineret med løg)",o:1,a:["sild","karrysild"],g:["Fruktaner"],l:1},
+ {n:"Leverpostej",lim:"et tyndt lag er lav, et tykt lag er mængdeafhængig pga. løg og mel",thr:{u:"stk",v:1},o:1,w:1,a:["leverpostej","postej"],g:["Fruktaner"],l:1},
+ {n:"Spegepølse / salami / pølser",lim:"1–2 skiver er lav; hele pølser med hvidløg er høj",thr:{u:"stk",v:2},o:1,a:["spegepølse","salami","pølse","pølser","hotdog","wiener","pepperoni","chorizo"],g:["Fruktaner"],l:1},
+ {n:"Sild (marineret med løg)",lim:"1 stykke uden løgringe er lav, med løg er høj",thr:{u:"stk",v:1},o:1,a:["sild","karrysild"],g:["Fruktaner"],l:1},
  {n:"Makrel i tomat / røget makrel / fiskefilet",a:["makrel","fiskefilet","fiskefrikadelle","fiskefrikadeller","laksefilet","røget laks"],g:[],l:0},
- {n:"Remoulade / ketchup",o:1,a:["remoulade","ketchup","chilisauce","bbq"],g:["Fruktaner","Fruktose"],l:1},
+ {n:"Remoulade / ketchup",lim:"1 spsk er lav, 2 eller flere er høj",thr:{u:"dl",v:0.15},o:1,a:["remoulade","ketchup","chilisauce","bbq"],g:["Fruktaner","Fruktose"],l:1},
  {n:"Mayonnaise / sennep / soja / bearnaise",a:["mayonnaise","mayo","sennep","soja","sojasauce","bearnaise"],g:[],l:0},
  {n:"Pesto / tzatziki / aioli",d:1,o:1,a:["pesto","tzatziki","aioli"],g:["Fruktaner","Laktose"],l:2},
- {n:"Brun sovs / flødesovs / bouillon",d:1,o:1,w:1,a:["brun sovs","sovs","flødesovs","bouillon","bouillonterning","fond"],g:["Fruktaner","Laktose"],l:1},
- {n:"Kartoffelmos (med mælk)",d:1,a:["kartoffelmos","mos"],g:["Laktose"],l:1},
- {n:"Rødkål",a:["rødkål"],g:["Fruktaner","Sorbitol"],l:1},
+ {n:"Brun sovs / flødesovs / bouillon",lim:"1 dl er lav-moderat, 2 dl er høj",thr:{u:"dl",v:1},d:1,o:1,w:1,a:["brun sovs","sovs","flødesovs","bouillon","bouillonterning","fond"],g:["Fruktaner","Laktose"],l:1},
+ {n:"Kartoffelmos (med mælk)",lim:"1 dl er lav, 2 dl er høj",thr:{u:"dl",v:1},d:1,a:["kartoffelmos","mos"],g:["Laktose"],l:1},
+ {n:"Rødkål",lim:"½ dl er lav, 1 dl er høj",thr:{u:"dl",v:0.5},a:["rødkål"],g:["Fruktaner","Sorbitol"],l:1},
  {n:"Agurkesalat / syltede rødbeder / asier",a:["agurkesalat","asier","syltede"],g:[],l:0},
  {n:"Flæskesteg / stegt flæsk / bøf",a:["flæskesteg","flæsk","bøf","steak","kotelet","lammekølle","and","kalkunbryst"],g:[],l:0},
  {n:"Smørrebrød / rugbrødsmad",w:1,a:["smørrebrød","rugbrødsmad","klemme","madpakke"],g:["Fruktaner"],l:2},
@@ -341,24 +349,24 @@ const FOODS=[
  {n:"Kammerjunker / æbleskiver / pandekager / vafler",d:1,w:1,a:["kammerjunker","æbleskiver","pandekage","pandekager","vaffel","vafler","crepes"],g:["Fruktaner","Laktose"],l:2},
  {n:"Kanelsnegl / flødebolle / lagkage / kager",d:1,w:1,a:["kanelsnegl","flødebolle","flødeboller","lagkage","brunsviger","drømmekage","chokoladekage","muffin","cookie","tærte","tebolle"],g:["Fruktaner","Laktose"],l:2},
  {n:"Bananbrød / rugbrødskage",w:1,a:["bananbrød"],g:["Fruktaner"],l:2},
- {n:"Lakrids",w:1,a:["lakrids","lakridser"],g:["Fruktaner"],l:1},
+ {n:"Lakrids",lim:"et par stykker er lav, en pose er høj",thr:{u:"stk",v:3},w:1,a:["lakrids","lakridser"],g:["Fruktaner"],l:1},
  {n:"Vingummi / bolsjer (med sukker)",a:["vingummi","bolsje","bolsjer","haribo","slik","karameller"],g:[],l:0},
- {n:"Marcipan / nougat",a:["marcipan","nougat"],g:["GOS"],l:1},
+ {n:"Marcipan / nougat",lim:"20 g er lav, 40 g er høj",thr:{u:"g",v:20},a:["marcipan","nougat"],g:["GOS"],l:1},
  {n:"Mørk chokolade",a:["mørk chokolade"],g:[],l:0},
  {n:"Cola / sodavand / danskvand",a:["cola","sodavand","danskvand","faxe kondi","fanta","sprite"],g:[],l:0},
- {n:"Æblejuice / saft / smoothie",a:["saft","saftevand","smoothie","juice"],g:["Fruktose","Sorbitol"],l:1},
+ {n:"Æblejuice / saft / smoothie",lim:"1 dl er lav for de fleste safttyper, æblejuice er høj allerede ved ½ dl",thr:{u:"dl",v:1},a:["saft","saftevand","smoothie","juice"],g:["Fruktose","Sorbitol"],l:1},
  {n:"Appelsinjuice",a:["appelsinjuice"],g:[],l:0},
- {n:"Energigel / sportsdrik",a:["energigel","gel","sportsdrik","isotonisk","elektrolyt","maurten","high5"],g:["Fruktose"],l:1},
+ {n:"Energigel / sportsdrik",lim:"1 gel eller 2½ dl sportsdrik er typisk lav; flere gels tæt på hinanden lægger sig sammen",thr:{u:"stk",v:1},a:["energigel","gel","sportsdrik","isotonisk","elektrolyt","maurten","high5"],g:["Fruktose"],l:1},
  {n:"Druesukker / dextrose",a:["druesukker","dextrose","glukose"],g:[],l:0},
- {n:"Energibar / proteinbar",w:1,a:["energibar","proteinbar","bar"],g:["Fruktaner","Fruktose"],l:1},
- {n:"Proteinpulver (valle)",d:1,a:["proteinpulver","whey","valleprotein","proteinshake"],g:["Laktose"],l:1},
+ {n:"Energibar / proteinbar",lim:"½ bar er ofte lav, en hel er høj",thr:{u:"stk",v:0.5},w:1,a:["energibar","proteinbar","bar"],g:["Fruktaner","Fruktose"],l:1},
+ {n:"Proteinpulver (valle)",lim:"isolat er lav; koncentrat 1 scoop er moderat",thr:{u:"stk",v:1},d:1,a:["proteinpulver","whey","valleprotein","proteinshake"],g:["Laktose"],l:1},
  {n:"Hvedemel / paneret / friturestegt",w:1,a:["hvedemel","paneret","panering","rasp","friturestegt","tempura"],g:["Fruktaner"],l:2},
  {n:"Tørret kød / pålæg (skinke, roastbeef, kylling)",a:["pålæg","roastbeef","hamburgerryg","kyllingebryst","kalkunpålæg"],g:[],l:0},
- {n:"Kartoffelsalat (mayo) / pastasalat",o:1,w:1,a:["kartoffelsalat","pastasalat"],g:["Fruktaner"],l:1},
+ {n:"Kartoffelsalat (mayo) / pastasalat",lim:"en lille portion er typisk lav; en stor er høj pga. løg/pasta",thr:{u:"dl",v:1.5},o:1,w:1,a:["kartoffelsalat","pastasalat"],g:["Fruktaner"],l:1},
  {n:"Æggekage / røræg / spejlæg",a:["æggekage","røræg","spejlæg","omelet"],g:[],l:0},
  {n:"Nudler (ris-) / rispapir",a:["risnudler","rispapir","glasnudler"],g:[],l:0},
  {n:"Kvinoa / hirse / polenta",a:["hirse","polenta","majsgrød"],g:[],l:0},
- {n:"Øl (i mængder)",w:1,a:["øl","pilsner","fadøl"],g:["Fruktaner"],l:1},
+ {n:"Øl (i mængder)",lim:"1 glas (ca. 3½ dl) er lav, mere er høj",thr:{u:"dl",v:3.5},w:1,a:["øl","pilsner","fadøl"],g:["Fruktaner"],l:1},
 ];
 const LVL=["lav","mængdeafhængig","høj"];
 function norm(s){ return " "+s.toLowerCase().replace(/[.,;:()\n]/g," ").replace(/\s+/g," ")+" "; }
@@ -371,6 +379,29 @@ function findNeg(text){
   /* "laktosefri", "gluten-fri", "glutenfrit" */
   for(const m of t.matchAll(/\b([a-zæøå]+)-?fri[t]?\b/g)){ const k=m[1]+"fri"; if(NEG[k]) out.add(NEG[k]); }
   return [...out];
+}
+const NUMW={en:1,et:1,"én":1,to:2,tre:3,fire:4,fem:5,seks:6,syv:7,otte:8,ni:9,ti:10,halv:0.5,halvt:0.5,halvanden:1.5,kvart:0.25,"½":0.5,"¼":0.25,"⅓":0.34,"¾":0.75,"⅛":0.125};
+const UNITS={dl:["dl",1],ml:["dl",0.01],l:["dl",10],liter:["dl",10],kop:["dl",2.5],kopper:["dl",2.5],spsk:["dl",0.15],tsk:["dl",0.05],glas:["dl",2.5],g:["g",1],gram:["g",1],kg:["g",1000],stk:["stk",1],styk:["stk",1],stykker:["stk",1],skive:["stk",1],skiver:["stk",1],"håndfuld":["stk",10],"håndfulde":["stk",10],gels:["stk",1],bar:["stk",1],barer:["stk",1]};
+function parseQty(text,f){
+  const t=text.toLowerCase();
+  for(const a of f.a){ const i=t.indexOf(a); if(i<0) continue;
+    /* op til 4 ord før fødevaren */
+    const before=t.slice(Math.max(0,i-32),i).split(/[\s,]+/).filter(Boolean).slice(-4);
+    let num=null,unit=null;
+    /* ellers op til 3 ord efter ("havregryn 1 dl") */
+    const after=t.slice(i+a.length).split(/[\s,]+/).filter(Boolean).slice(0,3);
+    const hasNumBefore=before.some(w=>!isNaN(parseFloat(w.replace(",",".")))||NUMW[w]!=null);
+    const scan=hasNumBefore?before:after.filter(w=>/^[\d,.]+$/.test(w)||NUMW[w]!=null||UNITS[w]);
+    for(const w of scan){ const n=parseFloat(w.replace(",","."));
+      if(!isNaN(n)) { num=n; unit=null; continue; }
+      if(NUMW[w]!=null){ num=NUMW[w]; unit=null; continue; }
+      if(UNITS[w]&&num!=null){ unit=UNITS[w]; } }
+    if(num==null) return null;
+    if(!unit){ /* "2 bananer", "halv avocado", "en håndfuld mandler" */
+      const isHalf=/^halv/.test(a)||before.includes("halv")||before.includes("halvt");
+      unit=["stk",1]; }
+    return {u:unit[0],v:num*unit[1]}; }
+  return null;
 }
 function assess(text){
   const t=norm(text); const hits=[]; const neg=findNeg(text);
@@ -389,6 +420,9 @@ function assess(text){
     }
     neg.filter(n=>GROUPS.includes(n)).forEach(g=>drop(g,g));
     f.el=f.eg.length?f.l:(f.l===0?0:0);
+    f.qty=null; f.qtyMsg="";
+    if(f.thr&&f.eg.length){ const q=parseQty(text,f); if(q&&q.u===f.thr.u){ f.qty=q;
+        if(q.v>f.thr.v*1.6){ f.el=2; f.qtyMsg="over grænsen"; } else if(q.v>f.thr.v){ f.el=1; f.qtyMsg="omkring grænsen"; } else { f.el=0; f.qtyMsg="inden for lav mængde"; } } }
     /* niveau falder til lav hvis alle grupper er fjernet; ellers uændret */
     if(f.eg.length && f.eg.length<f.g.length && f.l===2) f.el=1;
   });
@@ -407,11 +441,14 @@ function renderVurd(){
   const por=segVal("m-por");
   const hi=v.hits.filter(f=>f.el===2), mid=v.hits.filter(f=>f.el===1);
   let verdict;
-  if(v.lvl===2) verdict="Høj FODMAP: "+hi.map(f=>f.n).join(", ");
+  if(v.lvl===2) verdict="Høj FODMAP: "+hi.map(f=>f.n+(f.qtyMsg?" ("+f.qtyMsg+")":"")).join(", ");
   else if(v.lvl===1) verdict=(por==="stor"?"Stor portion af mængdeafhængige fødevarer: ":"Mængdeafhængig: ")+mid.map(f=>f.n).join(", ");
-  else verdict="Lav FODMAP ud fra det genkendte";
+  else verdict="Lav FODMAP ud fra det genkendte"+(v.hits.some(f=>f.qtyMsg)?" og de angivne mængder":"");
+  const limits=v.hits.filter(f=>f.lim&&f.eg.length).map(f=>`<div>· <strong>${f.n.split(" (")[0]}:</strong> ${f.lim}${f.qty?` — du skrev ${f.qty.v%1?f.qty.v.toFixed(2).replace(".",","):f.qty.v} ${f.qty.u}: ${f.qtyMsg}`:""}</div>`).join("");
+  const stack=v.hits.filter(f=>f.lim&&f.eg.length&&f.el<2).length>=2?`<div>Flere mængdeafhængige fødevarer i samme måltid lægger sig sammen. Hold hver under sin grænse, eller fordel dem over dagen.</div>`:"";
   box.innerHTML=`<div>${lvlDot(v.lvl)}<strong>${verdict}</strong></div>
     ${v.adj.length?`<div>Tilpasset: ${v.adj.join(", ")}</div>`:""}
+    ${limits?`<div style="margin-top:4px">${limits}</div>`:""}${stack}
     <div style="margin-top:4px">${v.hits.map(f=>`<span class="tag">${f.n}${f.eg.length?" · "+f.eg.join("/"):""}${f.adj.length?` <s>${f.g.filter(g=>!f.eg.includes(g)).join("/")}</s>`:""}</span>`).join("")}</div>`;
   if(!touched){ chipsClear("m-grp"); document.querySelectorAll("#m-grp .chip").forEach(b=>{ if(v.groups.includes(b.textContent)) b.classList.add("on"); }); }
 }
@@ -446,7 +483,7 @@ document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>{ document.querySelec
 $("#m-mad").addEventListener("input",renderVurd); $("#m-por").addEventListener("click",()=>setTimeout(renderVurd,0));
 $("#food-q").addEventListener("input",()=>{ const q=$("#food-q").value.trim().toLowerCase(); const r=$("#food-r"); if(q.length<2){ r.innerHTML=""; return; }
   const hits=FOODS.filter(f=>f.n.toLowerCase().includes(q)||f.a.some(a=>a.includes(q))).slice(0,8);
-  r.innerHTML=hits.length?hits.map(f=>`<div class="entry"><div class="t">${lvlDot(f.l)}${LVL[f.l]}</div><div>${f.n}<div class="k">${f.g.length?f.g.join(", "):"ingen FODMAP-gruppe"}</div></div><div></div></div>`).join(""):"<div class=\"empty\">Ikke på listen.</div>"; });
+  r.innerHTML=hits.length?hits.map(f=>`<div class="entry"><div class="t">${lvlDot(f.l)}${LVL[f.l]}</div><div>${f.n}<div class="k">${f.g.length?f.g.join(", "):"ingen FODMAP-gruppe"}${f.lim?"<br>"+f.lim:""}</div></div><div></div></div>`).join(""):"<div class=\"empty\">Ikke på listen.</div>"; });
 $("#m-save").onclick=()=>{ const mad=$("#m-mad").value.trim(); if(!mad){toast("Skriv hvad du spiste"); return;}
   D.meals.push({id:Date.now(),t:$("#m-t").value||nowLocal(),mad,grp:chipsOn("m-grp"),por:segVal("m-por"),lvl:assess(mad).lvl,adj:assess(mad).adj,src:touched?"bekræftet":"auto"}); save();
   $("#m-mad").value=""; chipsClear("m-grp"); $("#m-vurd").innerHTML=""; touched=false; $("#m-t").value=nowLocal(); toast("Måltid gemt"); render(); };
@@ -561,6 +598,7 @@ function showView(v){ document.querySelectorAll(".view").forEach(x=>x.classList.
   document.querySelectorAll(".tab").forEach(t=>t.classList.toggle("on",t.dataset.v===v)); window.scrollTo(0,0); }
 $("#intro-go").onclick=()=>{ D.introSeen=true; save(); showView("log"); };
 $("#intro-open").onclick=()=>showView("intro");
+$("#to-mad").onclick=()=>{ showView("mad"); setTimeout(()=>$("#food-q").focus(),50); };
 load(); ["m-t","l-t","s-t"].forEach(i=>$("#"+i).value=nowLocal()); render();
 if(!D.introSeen) showView("intro");
 </script>
