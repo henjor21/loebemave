@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Løbemave – pilot</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+:root{
+  --bg:#F3F6F2; --panel:#FFFFFF; --ink:#1B2B25; --muted:#5C6B64; --line:#D5DDD7;
+  --accent:#0E6E64; --accent-ink:#FFFFFF; --soft:#DDEDE9;
+  --g0:#CFE3D6; --g1:#F2D98D; --g2:#E9A65B; --g3:#C9503F;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#121A16; --panel:#1B2520; --ink:#EAF1EC; --muted:#9DB0A6; --line:#2E3C35;
+  --accent:#4FB8AA; --accent-ink:#0F1A16; --soft:#1F3530;
+  --g0:#2C4A3C; --g1:#7A6A2A; --g2:#8C5A24; --g3:#9A3A2C; }}
+:root[data-theme="dark"]{
+  --bg:#121A16; --panel:#1B2520; --ink:#EAF1EC; --muted:#9DB0A6; --line:#2E3C35;
+  --accent:#4FB8AA; --accent-ink:#0F1A16; --soft:#1F3530;
+  --g0:#2C4A3C; --g1:#7A6A2A; --g2:#8C5A24; --g3:#9A3A2C; }
+html{scroll-padding-top:env(safe-area-inset-top,0px); height:100%}
+*{box-sizing:inherit}
+body{margin:0; height:100%; background:var(--bg); color:var(--ink);
+  font-family:"Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", sans-serif; font-size:17px; line-height:1.45}
+header{padding:18px 18px 8px}
+header h1{margin:0; font-size:22px; font-weight:700; letter-spacing:-.01em}
+header p{margin:2px 0 0; color:var(--muted); font-size:15px}
+main{padding:0 14px 96px; max-width:560px; margin:0 auto}
+section.view{display:none} section.view.on{display:block}
+h2{font-size:18px; margin:18px 0 8px}
+h3{font-size:16px; margin:14px 0 6px; color:var(--muted); font-weight:400}
+.card{background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:14px; margin-bottom:12px}
+label{display:block; font-size:15px; color:var(--muted); margin:10px 0 4px}
+input,select,textarea{width:100%; font:inherit; color:var(--ink); background:var(--bg); border:1px solid var(--line); border-radius:10px; padding:10px 12px}
+textarea{min-height:64px; resize:vertical}
+.row{display:flex; gap:8px} .row>*{flex:1}
+.chips{display:flex; flex-wrap:wrap; gap:6px; margin-top:6px}
+.chip{border:1px solid var(--line); background:var(--bg); color:var(--ink); border-radius:999px; padding:7px 12px; font:inherit; font-size:15px; cursor:pointer}
+.chip.on{background:var(--accent); color:var(--accent-ink); border-color:var(--accent)}
+.seg{display:flex; border:1px solid var(--line); border-radius:10px; overflow:hidden}
+.seg button{flex:1; border:0; background:var(--bg); color:var(--ink); padding:10px 4px; font:inherit; font-size:15px; cursor:pointer}
+.seg button.on{background:var(--accent); color:var(--accent-ink)}
+.btn{display:block; width:100%; border:0; border-radius:12px; padding:13px; font:inherit; font-weight:700; background:var(--accent); color:var(--accent-ink); cursor:pointer; margin-top:14px}
+.btn.quiet{background:var(--soft); color:var(--ink); font-weight:400}
+.btn:focus-visible,.chip:focus-visible,.seg button:focus-visible,.tab:focus-visible{outline:3px solid var(--accent); outline-offset:2px}
+.choose{display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px}
+.choose button{border:1px solid var(--line); background:var(--panel); color:var(--ink); border-radius:12px; padding:16px 6px; font:inherit; font-size:16px; cursor:pointer}
+.choose button.on{border-color:var(--accent); background:var(--soft)}
+.entry{display:grid; grid-template-columns:52px 1fr auto; gap:10px; padding:10px 0; border-top:1px solid var(--line); align-items:start}
+.entry:first-child{border-top:0}
+.entry .t{color:var(--muted); font-size:14px; padding-top:2px}
+.entry .k{font-size:14px; color:var(--muted)}
+.entry .del{background:none; border:0; color:var(--muted); font:inherit; font-size:14px; cursor:pointer; padding:0}
+.grade{display:inline-block; width:12px; height:12px; border-radius:50%; vertical-align:-1px; margin-right:6px}
+.tag{display:inline-block; font-size:13px; padding:2px 8px; border-radius:999px; background:var(--soft); margin:2px 4px 0 0}
+.empty{color:var(--muted); padding:8px 0}
+table{width:100%; border-collapse:collapse; font-size:15px}
+td,th{text-align:left; padding:8px 4px; border-top:1px solid var(--line); vertical-align:top}
+th{color:var(--muted); font-weight:400; border-top:0}
+.wrap{overflow-x:auto}
+.toast{position:fixed; left:50%; transform:translateX(-50%); bottom:calc(84px + env(safe-area-inset-bottom,0px)); background:var(--ink); color:var(--bg); padding:10px 16px; border-radius:999px; font-size:15px; opacity:0; transition:opacity .2s; pointer-events:none}
+.toast.on{opacity:1}
+nav{position:fixed; left:0; right:0; bottom:0; display:flex; background:var(--panel); border-top:1px solid var(--line); padding:6px 0 calc(6px + env(safe-area-inset-bottom,0px))}
+.tab{flex:1; border:0; background:none; color:var(--muted); font:inherit; font-size:13px; padding:6px 2px; cursor:pointer}
+.tab.on{color:var(--accent); font-weight:700}
+.tab span{display:block; font-size:20px}
+.note{font-size:14px; color:var(--muted)}
+@media (prefers-reduced-motion: reduce){ .toast{transition:none} }
+</style>
+</head>
+<body>
+<header>
+  <h1>Løbemave</h1>
+  <p id="sub">Pilot · registrér før du får symptomer</p>
+</header>
+<main>
+
+<!-- INTRO -->
+<section class="view" id="v-intro">
+  <div class="card">
+    <h2 style="margin-top:0">Hvorfor en dagbog?</h2>
+    <p>Løbermave har sjældent én årsag. Det, der giver problemer, er ofte en kombination af <em>hvad</em> du spiste, <em>hvor meget</em>, <em>hvor tæt på løbeturen</em> og hvor hård turen var. Det mønster er svært at se bagud i tide. Når først maven driller, husker man det, der passer med forklaringen.</p>
+    <p>Dagbogen vender rækkefølgen om: du registrerer maden, før du ved, hvordan turen går. Så bliver sammenhængen synlig i data, ikke i hukommelsen.</p>
+    <p>Den bygger på low FODMAP-metoden fra Monash University. FODMAP er en gruppe kulhydrater, som nogle maver reagerer på, og som findes i bl.a. hvede, løg, mælk, æbler, stenfrugt og champignon. Metoden har tre faser: eliminering, genintroduktion og en varig, personlig kost. Dagbogen hjælper især med de to sidste, hvor du finder ud af, hvilke grupper og mængder netop du tåler.</p>
+  </div>
+  <div class="card">
+    <h2 style="margin-top:0">Sådan bruger du den</h2>
+    <p><strong>Hver dag.</strong> Registrér dine måltider, når du spiser dem. Skriv kort hvad, og markér de FODMAP-grupper, der er i måltidet. Er du i tvivl, så se listen under <em>Mere</em>. Angiv portionen. Mængden betyder ofte mere end fødevaren.</p>
+    <p><strong>Når du løber.</strong> Gem turen med distance og intensitet, og angiv, hvordan maven var undervejs. Det er den vigtigste måling i dagbogen.</p>
+    <p><strong>Når maven driller.</strong> Registrér symptomet med det samme, også uden løb. Det er lige så vigtigt at vide, hvornår der <em>ikke</em> er symptomer.</p>
+    <p><strong>Når du vil teste en gruppe.</strong> Under <em>Test</em> starter du en genintroduktion: én gruppe, tre dage med stigende mængde, og en løbetur inden for et døgn efter mindst én af dagene. Hold tre dages pause før næste gruppe. Resultatet gemmes, så du med tiden får din egen tolerance-liste.</p>
+    <p><strong>Læs mønstrene.</strong> <em>Overblik</em> viser, hvad du spiste inden hver løbetur, og hvordan den gik. Tallene er et mønster, ikke et bevis. Først efter en del løbeture bliver de til at stole på.</p>
+    <p class="note">Tre ting, der gør data brugbare: registrér før, ikke efter. Registrér også de gode dage. Skift kun én ting ad gangen.</p>
+  </div>
+  <div class="card">
+    <h2 style="margin-top:0">Dine data</h2>
+    <p class="note">Alt bliver på din telefon. Ingen data sendes nogen steder. Tag en sikkerhedskopi under <em>Mere</em> nu og da. Dagbogen er et refleksionsværktøj og erstatter ikke lægelig rådgivning.</p>
+    <button class="btn" id="intro-go">Start dagbogen</button>
+  </div>
+</section>
+
+<!-- I DAG -->
+<section class="view on" id="v-log">
+  <div class="card" id="arkivnudge" hidden><p class="note" style="margin:0">Det er over en uge siden, du sidst gemte et arkiv. <button class="chip" id="nudge-go">Gem arkiv nu</button></p></div>
+  <div class="choose" id="kind">
+    <button data-k="maaltid" class="on">Måltid</button>
+    <button data-k="loeb">Løbetur</button>
+    <button data-k="symptom">Symptom</button>
+  </div>
+
+  <div class="card" id="f-maaltid">
+    <label>Tidspunkt</label><input type="datetime-local" id="m-t">
+    <label>Hvad spiste du?</label><textarea id="m-mad" placeholder="fx havregrød med laktosefri mælk og banan"></textarea>
+    <label>FODMAP-grupper i måltidet</label>
+    <div class="chips" id="m-grp"></div>
+    <label>Portion</label>
+    <div class="seg" id="m-por"><button data-v="lille">Lille</button><button data-v="mellem" class="on">Mellem</button><button data-v="stor">Stor</button></div>
+    <button class="btn" id="m-save">Gem måltid</button>
+  </div>
+
+  <div class="card" id="f-loeb" hidden>
+    <label>Start</label><input type="datetime-local" id="l-t">
+    <div class="row">
+      <div><label>Varighed (min)</label><input type="number" id="l-min" inputmode="numeric" placeholder="60"></div>
+      <div><label>Distance (km)</label><input type="number" id="l-km" inputmode="decimal" step="0.1" placeholder="12"></div>
+    </div>
+    <label>Intensitet</label>
+    <div class="seg" id="l-int"><button data-v="let">Let</button><button data-v="moderat" class="on">Moderat</button><button data-v="hård">Hård</button></div>
+    <label>Mave under turen</label>
+    <div class="seg" id="l-mave"><button data-v="0" class="on">Rolig</button><button data-v="1">Lidt uro</button><button data-v="2">Generende</button><button data-v="3">Måtte stoppe</button></div>
+    <button class="btn" id="l-save">Gem løbetur</button>
+  </div>
+
+  <div class="card" id="f-symptom" hidden>
+    <label>Tidspunkt</label><input type="datetime-local" id="s-t">
+    <label>Type</label>
+    <div class="chips" id="s-type"></div>
+    <label>Grad</label>
+    <div class="seg" id="s-grad"><button data-v="1" class="on">Mild</button><button data-v="2">Moderat</button><button data-v="3">Kraftig</button></div>
+    <label>Sammenhæng med løb</label>
+    <div class="seg" id="s-ctx"><button data-v="ingen" class="on">Uden løb</button><button data-v="under">Under løb</button><button data-v="efter">Efter løb</button></div>
+    <label>Note (valgfri)</label><input id="s-note" placeholder="fx spiste ude i går">
+    <button class="btn" id="s-save">Gem symptom</button>
+  </div>
+
+  <h2>Seneste registreringer</h2>
+  <div class="card" id="recent"></div>
+</section>
+
+<!-- TEST -->
+<section class="view" id="v-test">
+  <div class="card" id="testbox"></div>
+  <h2>Gennemførte tests</h2>
+  <div class="card" id="tests-done"></div>
+  <p class="note">Metoden følger Monashs tre faser. Monash anbefaler diætistvejledning til genintroduktion; appen erstatter ikke den.</p>
+</section>
+
+<!-- OVERBLIK -->
+<section class="view" id="v-over">
+  <h2>Løbeture og det, du spiste før</h2>
+  <p class="note">Viser FODMAP-grupper spist inden for 24 timer før hver løbetur, og mave under turen samt symptomer op til 6 timer efter.</p>
+  <div class="card wrap" id="runs"></div>
+  <h2>Grupper og løbeture</h2>
+  <p class="note">Et mønster, ikke en forklaring. Få løbeture giver usikre tal.</p>
+  <div class="card wrap" id="groups"></div>
+</section>
+
+<!-- MERE -->
+<section class="view" id="v-more">
+  <div class="card">
+    <h2 style="margin-top:0">Dine data</h2>
+    <p class="note" id="datastatus"></p>
+    <p class="note">Alt gemmes automatisk på telefonen, mens du registrerer. Et arkiv er en kopi af alle data som én fil, som du kan lægge i Filer (fx iCloud Drive). Det er din backup, hvis browseren rydder sine data, eller du skifter telefon.</p>
+    <button class="btn" id="arkiv">Gem arkiv i Filer</button>
+    <input type="file" id="arkivfil" accept=".json,application/json" hidden>
+    <button class="btn quiet" id="gendan">Gendan fra arkiv</button>
+    <button class="btn quiet" id="exp">Vis data som tekst (kopiér)</button>
+    <textarea id="io" placeholder="Indsæt en sikkerhedskopi her for at gendanne" hidden></textarea>
+    <button class="btn quiet" id="imp" hidden>Gendan fra teksten</button>
+    <button class="btn quiet" id="wipe">Slet alle data</button>
+    <p class="note">Tip: Føj siden til hjemmeskærmen (Del → Føj til hjemmeskærm). Så bliver data ikke ryddet af Safari, selv om appen ikke bruges i en uge.</p>
+  </div>
+  <div class="card">
+    <h2 style="margin-top:0">Introduktion</h2>
+    <p class="note">Hvorfor dagbogen findes, og hvordan den bruges.</p>
+    <button class="btn quiet" id="intro-open">Læs introduktionen igen</button>
+  </div>
+  <div class="card">
+    <h2 style="margin-top:0">FODMAP-grupperne</h2>
+    <table>
+      <tr><td>Fruktaner</td><td>hvede, rug, løg, hvidløg, porre</td></tr>
+      <tr><td>GOS</td><td>bønner, linser, kikærter</td></tr>
+      <tr><td>Laktose</td><td>mælk, yoghurt, blød ost</td></tr>
+      <tr><td>Fruktose</td><td>æble, pære, honning, mango</td></tr>
+      <tr><td>Sorbitol</td><td>blomme, nektarin, fersken, abrikos</td></tr>
+      <tr><td>Mannitol</td><td>champignon, blomkål, sukkerærter</td></tr>
+    </table>
+    <p class="note">Vejledende. Mange fødevarer indeholder flere grupper, og mængden afgør.</p>
+  </div>
+</section>
+</main>
+
+<nav>
+  <button class="tab on" data-v="log"><span>✎</span>I dag</button>
+  <button class="tab" data-v="test"><span>◔</span>Test</button>
+  <button class="tab" data-v="over"><span>≡</span>Overblik</button>
+  <button class="tab" data-v="more"><span>…</span>Mere</button>
+</nav>
+<div class="toast" id="toast"></div>
+
+<script>
+const GROUPS=["Fruktaner","GOS","Laktose","Fruktose","Sorbitol","Mannitol"];
+const STYPES=["Oppustethed","Mavesmerter","Trang / diarré","Luft","Kvalme"];
+const KEY="lobemave-v1";
+let D={meals:[],runs:[],syms:[],tests:[],active:null};
+
+function load(){ try{ const r=localStorage.getItem(KEY); if(r) D=Object.assign(D,JSON.parse(r)); }catch(e){} }
+function save(){ try{ localStorage.setItem(KEY,JSON.stringify(D)); }catch(e){ toast("Kunne ikke gemme – browseren tillader ikke lagring"); } }
+function toast(m){ const t=document.getElementById("toast"); t.textContent=m; t.classList.add("on"); setTimeout(()=>t.classList.remove("on"),1800); }
+function nowLocal(){ const d=new Date(); d.setMinutes(d.getMinutes()-d.getTimezoneOffset()); return d.toISOString().slice(0,16); }
+function fmt(iso){ const d=new Date(iso); return d.toLocaleDateString("da-DK",{day:"numeric",month:"short"})+" "+d.toLocaleTimeString("da-DK",{hour:"2-digit",minute:"2-digit"}); }
+function day(iso){ return new Date(iso).toLocaleDateString("da-DK",{weekday:"short",day:"numeric",month:"short"}); }
+const $=s=>document.querySelector(s);
+
+/* chips & segs */
+function chips(id,list){ const c=$("#"+id); c.innerHTML=""; list.forEach(g=>{ const b=document.createElement("button"); b.className="chip"; b.type="button"; b.textContent=g; b.onclick=()=>b.classList.toggle("on"); c.appendChild(b); }); }
+function chipsOn(id){ return [...document.querySelectorAll("#"+id+" .chip.on")].map(b=>b.textContent); }
+function chipsClear(id){ document.querySelectorAll("#"+id+" .chip").forEach(b=>b.classList.remove("on")); }
+document.querySelectorAll(".seg").forEach(s=>s.addEventListener("click",e=>{ const b=e.target.closest("button"); if(!b) return; s.querySelectorAll("button").forEach(x=>x.classList.remove("on")); b.classList.add("on"); }));
+function segVal(id){ return $("#"+id+" .on").dataset.v; }
+chips("m-grp",GROUPS); chips("s-type",STYPES);
+
+/* kind switch */
+$("#kind").addEventListener("click",e=>{ const b=e.target.closest("button"); if(!b) return;
+  $("#kind").querySelectorAll("button").forEach(x=>x.classList.toggle("on",x===b));
+  ["maaltid","loeb","symptom"].forEach(k=>$("#f-"+k).hidden=(k!==b.dataset.k)); });
+
+/* tabs */
+document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>{ document.querySelectorAll(".tab").forEach(x=>x.classList.toggle("on",x===t));
+  document.querySelectorAll(".view").forEach(v=>v.classList.toggle("on",v.id==="v-"+t.dataset.v)); render(); });
+
+/* save handlers */
+$("#m-save").onclick=()=>{ const mad=$("#m-mad").value.trim(); if(!mad){toast("Skriv hvad du spiste"); return;}
+  D.meals.push({id:Date.now(),t:$("#m-t").value||nowLocal(),mad,grp:chipsOn("m-grp"),por:segVal("m-por")}); save();
+  $("#m-mad").value=""; chipsClear("m-grp"); $("#m-t").value=nowLocal(); toast("Måltid gemt"); render(); };
+$("#l-save").onclick=()=>{ D.runs.push({id:Date.now(),t:$("#l-t").value||nowLocal(),min:+$("#l-min").value||null,km:+$("#l-km").value||null,int:segVal("l-int"),mave:+segVal("l-mave")}); save();
+  $("#l-min").value=""; $("#l-km").value=""; $("#l-t").value=nowLocal(); toast("Løbetur gemt"); render(); };
+$("#s-save").onclick=()=>{ const ty=chipsOn("s-type"); if(!ty.length){toast("Vælg mindst én type"); return;}
+  D.syms.push({id:Date.now(),t:$("#s-t").value||nowLocal(),ty,grad:+segVal("s-grad"),ctx:segVal("s-ctx"),note:$("#s-note").value.trim()}); save();
+  chipsClear("s-type"); $("#s-note").value=""; $("#s-t").value=nowLocal(); toast("Symptom gemt"); render(); };
+
+function del(kind,id){ if(!confirm("Slet registreringen?")) return; D[kind]=D[kind].filter(x=>x.id!==id); save(); render(); }
+function gradeDot(g){ return `<span class="grade" style="background:var(--g${g})"></span>`; }
+
+/* recent */
+function renderRecent(){
+  const all=[...D.meals.map(m=>({k:"meals",t:m.t,id:m.id,h:`${m.mad}<div class="k">${m.grp.length?m.grp.map(g=>`<span class="tag">${g}</span>`).join(""):"<span class='tag'>Ingen FODMAP-gruppe</span>"} · ${m.por}</div>`})),
+    ...D.runs.map(r=>({k:"runs",t:r.t,id:r.id,h:`${gradeDot(r.mave)}Løbetur ${r.km?r.km+" km":""} ${r.min?r.min+" min":""}<div class="k">${r.int} · mave: ${["rolig","lidt uro","generende","måtte stoppe"][r.mave]}</div>`})),
+    ...D.syms.map(s=>({k:"syms",t:s.t,id:s.id,h:`${gradeDot(s.grad)}${s.ty.join(", ")}<div class="k">${["","mild","moderat","kraftig"][s.grad]} · ${s.ctx==="ingen"?"uden løb":s.ctx+" løb"}${s.note?" · "+s.note:""}</div>`}))]
+    .sort((a,b)=>b.t.localeCompare(a.t)).slice(0,12);
+  $("#recent").innerHTML=all.length?all.map(e=>`<div class="entry"><div class="t">${fmt(e.t)}</div><div>${e.h}</div><button class="del" onclick="del('${e.k}',${e.id})">Slet</button></div>`).join(""):`<div class="empty">Ingen registreringer endnu. Start med dagens måltider.</div>`;
+}
+
+/* tests */
+function renderTest(){
+  const box=$("#testbox"); const a=D.active;
+  if(!a){
+    const done=D.tests.map(t=>t.grp);
+    box.innerHTML=`<h2 style="margin-top:0">Start en genintroduktion</h2>
+      <p class="note">Én gruppe ad gangen, tre dage med stigende mængde, og en løbetur inden for 24 timer efter mindst én af dagene. Hold pause på 3 dage før næste gruppe.</p>
+      <label>Gruppe</label><select id="t-grp">${GROUPS.map(g=>`<option ${done.includes(g)?"":""}>${g}${done.includes(g)?" (testet)":""}</option>`).join("")}</select>
+      <label>Testfødevare</label><input id="t-food" placeholder="fx 1 skive hvedebrød">
+      <button class="btn" id="t-start">Start test</button>`;
+    $("#t-start").onclick=()=>{ const food=$("#t-food").value.trim(); if(!food){toast("Skriv testfødevaren"); return;}
+      D.active={id:Date.now(),grp:$("#t-grp").value.replace(" (testet)",""),food,start:nowLocal().slice(0,10),days:[]}; save(); renderTest(); };
+    return;
+  }
+  const dayN=a.days.length+1; const doses=["lille","mellem","stor"];
+  box.innerHTML=`<h2 style="margin-top:0">${a.grp} · dag ${Math.min(dayN,3)} af 3</h2>
+    <p class="note">${a.food}. Startet ${day(a.start)}.</p>
+    ${a.days.map((d,i)=>`<div class="entry"><div class="t">Dag ${i+1}</div><div>${gradeDot(d.grad)}${doses[d.dose]} mængde · ${["ingen symptomer","mild","moderat","kraftig"][d.grad]}${d.run?" · løb":""}</div><div></div></div>`).join("")}
+    ${dayN<=3?`<label>Mængde i dag</label>
+      <div class="seg" id="t-dose"><button data-v="0" ${dayN===1?"class=on":""}>Lille</button><button data-v="1" ${dayN===2?"class=on":""}>Mellem</button><button data-v="2" ${dayN===3?"class=on":""}>Stor</button></div>
+      <label>Symptomer i løbet af dagen</label>
+      <div class="seg" id="t-grad"><button data-v="0" class="on">Ingen</button><button data-v="1">Mild</button><button data-v="2">Moderat</button><button data-v="3">Kraftig</button></div>
+      <label>Løb inden for 24 timer?</label>
+      <div class="seg" id="t-run"><button data-v="0" class="on">Nej</button><button data-v="1">Ja</button></div>
+      <button class="btn" id="t-day">Gem dag ${dayN}</button>`:""}
+    <label>Afslut testen</label>
+    <div class="seg" id="t-res"><button data-v="tåles" class="on">Tåles</button><button data-v="tåles delvist">Tåles delvist</button><button data-v="tåles ikke">Tåles ikke</button></div>
+    <button class="btn quiet" id="t-end">Afslut og gem resultat</button>
+    <button class="btn quiet" id="t-cancel">Afbryd testen</button>`;
+  box.querySelectorAll(".seg").forEach(s=>s.addEventListener("click",e=>{ const b=e.target.closest("button"); if(!b) return; s.querySelectorAll("button").forEach(x=>x.classList.remove("on")); b.classList.add("on"); }));
+  const td=$("#t-day"); if(td) td.onclick=()=>{ a.days.push({dose:+segVal("t-dose"),grad:+segVal("t-grad"),run:+segVal("t-run")===1}); save(); renderTest(); };
+  $("#t-end").onclick=()=>{ if(!a.days.length){toast("Gem mindst én dag først"); return;} D.tests.push({...a,end:nowLocal().slice(0,10),res:segVal("t-res")}); D.active=null; save(); toast("Test gemt"); renderTest(); };
+  $("#t-cancel").onclick=()=>{ if(confirm("Afbryd testen uden at gemme?")){ D.active=null; save(); renderTest(); } };
+  $("#tests-done").innerHTML=D.tests.length?D.tests.map(t=>`<div class="entry"><div class="t">${day(t.start)}</div><div><strong>${t.grp}</strong> – ${t.res}<div class="k">${t.food} · ${t.days.length} dage</div></div><button class="del" onclick="del('tests',${t.id})">Slet</button></div>`).join(""):`<div class="empty">Ingen gennemførte tests.</div>`;
+}
+function renderDone(){ $("#tests-done").innerHTML=D.tests.length?D.tests.map(t=>`<div class="entry"><div class="t">${day(t.start)}</div><div><strong>${t.grp}</strong> – ${t.res}<div class="k">${t.food} · ${t.days.length} dage</div></div><button class="del" onclick="del('tests',${t.id})">Slet</button></div>`).join(""):`<div class="empty">Ingen gennemførte tests.</div>`; }
+
+/* overview */
+function analyse(){
+  return D.runs.slice().sort((a,b)=>b.t.localeCompare(a.t)).map(r=>{
+    const t=new Date(r.t).getTime();
+    const before=D.meals.filter(m=>{const mt=new Date(m.t).getTime(); return mt<=t && mt>=t-24*3600e3;});
+    const grps=[...new Set(before.flatMap(m=>m.grp))];
+    const after=D.syms.filter(s=>{const st=new Date(s.t).getTime(); return st>=t && st<=t+(r.min||60)*60e3+6*3600e3;});
+    const worst=Math.max(r.mave,...after.map(s=>s.grad),0);
+    return {r,grps,after,worst};
+  });
+}
+function renderOver(){
+  const rows=analyse();
+  $("#runs").innerHTML=rows.length?`<table><tr><th>Løbetur</th><th>Spist før</th><th>Mave</th></tr>${rows.map(x=>`<tr><td>${day(x.r.t)}<div class="k">${x.r.km?x.r.km+" km · ":""}${x.r.int}</div></td><td>${x.grps.length?x.grps.map(g=>`<span class="tag">${g}</span>`).join(""):"<span class='note'>ingen registreret</span>"}</td><td>${gradeDot(x.worst)}${["rolig","mild","moderat","kraftig"][x.worst]}${x.after.length?`<div class="k">${x.after.map(s=>s.ty.join(", ")).join("; ")}</div>`:""}</td></tr>`).join("")}</table>`:`<div class="empty">Ingen løbeture endnu.</div>`;
+  const stat=GROUPS.map(g=>{ const w=rows.filter(x=>x.grps.includes(g)); const wo=rows.filter(x=>!x.grps.includes(g));
+    const f=a=>a.length?Math.round(100*a.filter(x=>x.worst>=2).length/a.length)+" % ("+a.length+")":"–";
+    return `<tr><td>${g}</td><td>${f(w)}</td><td>${f(wo)}</td></tr>`; }).join("");
+  $("#groups").innerHTML=rows.length?`<table><tr><th>Gruppe</th><th>Problemer når spist</th><th>Problemer når ikke</th></tr>${stat}</table><p class="note">"Problemer" = moderat eller kraftig. Tallet i parentes er antal løbeture.</p>`:`<div class="empty">Kommer når der er løbeture og måltider.</div>`;
+}
+
+/* more */
+$("#exp").onclick=()=>{ const io=$("#io"); io.hidden=false; $("#imp").hidden=false; io.value=JSON.stringify(D); io.select(); try{ navigator.clipboard.writeText(io.value); toast("Kopieret til udklipsholderen"); }catch(e){ toast("Markér teksten og kopiér"); } };
+$("#imp").onclick=()=>{ try{ const j=JSON.parse($("#io").value); if(!j.meals) throw 0; if(confirm("Erstat alle data på telefonen med den indsatte kopi?")){ D=j; save(); toast("Data gendannet"); render(); } }catch(e){ toast("Teksten er ikke en gyldig sikkerhedskopi"); } };
+$("#wipe").onclick=()=>{ if(confirm("Slet alle registreringer permanent?")){ D={meals:[],runs:[],syms:[],tests:[],active:null}; save(); render(); toast("Alt slettet"); } };
+
+/* arkiv */
+let DL=null;
+(async()=>{ try{ if(window.claude&&claude.use) DL=await claude.use("downloads"); }catch(e){ DL=null; } })();
+function arkivNavn(){ return "lobemave-arkiv-"+nowLocal().slice(0,10)+".json"; }
+async function gemArkiv(){
+  const data=JSON.stringify(D,null,1);
+  if(DL){ try{ await DL.save({filename:arkivNavn(),data}); D.lastArchive=new Date().toISOString(); save(); toast("Arkiv gemt"); render(); return; }
+    catch(e){ if(e&&e.code==="declined"){ toast("Arkiv ikke gemt"); return; } if(e&&e.code==="rate_limited"){ toast("Prøv igen om lidt"); return; } } }
+  try{ const f=new File([data],arkivNavn(),{type:"application/json"});
+    if(navigator.canShare&&navigator.canShare({files:[f]})){ await navigator.share({files:[f],title:"Løbemave-arkiv"}); D.lastArchive=new Date().toISOString(); save(); toast("Arkiv delt"); render(); return; } }catch(e){ if(e&&e.name==="AbortError") return; }
+  $("#io").hidden=false; $("#imp").hidden=false; $("#io").value=data; $("#io").select(); toast("Kopiér teksten og gem den som fil");
+}
+$("#arkiv").onclick=gemArkiv; $("#nudge-go").onclick=gemArkiv;
+$("#gendan").onclick=()=>$("#arkivfil").click();
+$("#arkivfil").onchange=e=>{ const f=e.target.files[0]; if(!f) return; const r=new FileReader();
+  r.onload=()=>{ try{ const j=JSON.parse(r.result); if(!j.meals) throw 0;
+    if(confirm(`Erstat alle data på telefonen med arkivet "${f.name}"?`)){ D=j; save(); toast("Arkiv gendannet"); render(); } }catch(x){ toast("Filen er ikke et gyldigt arkiv"); } e.target.value=""; };
+  r.readAsText(f); };
+function renderData(){
+  const la=D.lastArchive?new Date(D.lastArchive):null;
+  $("#datastatus").textContent=la?`Sidste arkiv: ${fmt(D.lastArchive)}.`:"Der er endnu ikke gemt et arkiv.";
+  const n=D.meals.length+D.runs.length+D.syms.length;
+  $("#arkivnudge").hidden=!(n>0 && (!la || Date.now()-la.getTime()>7*864e5));
+}
+
+function render(){ renderRecent(); renderTest(); renderDone(); renderOver(); renderData();
+  $("#sub").textContent=`${D.meals.length} måltider · ${D.runs.length} løbeture · ${D.syms.length} symptomer`; }
+function showView(v){ document.querySelectorAll(".view").forEach(x=>x.classList.toggle("on",x.id==="v-"+v));
+  document.querySelectorAll(".tab").forEach(t=>t.classList.toggle("on",t.dataset.v===v)); window.scrollTo(0,0); }
+$("#intro-go").onclick=()=>{ D.introSeen=true; save(); showView("log"); };
+$("#intro-open").onclick=()=>showView("intro");
+load(); ["m-t","l-t","s-t"].forEach(i=>$("#"+i).value=nowLocal()); render();
+if(!D.introSeen) showView("intro");
+</script>
+</body>
+</html>
